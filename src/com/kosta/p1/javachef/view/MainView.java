@@ -15,7 +15,7 @@ public class MainView extends JFrame {
 	
 	public MainView() {
 		setTitle("ÀÚÆÇ±â");
-		
+		System.out.println("OH");
 		setBounds(800,200,280,500);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
