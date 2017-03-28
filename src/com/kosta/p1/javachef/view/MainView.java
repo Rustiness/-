@@ -14,7 +14,7 @@ public class MainView extends JFrame {
 	JTextArea ta;
 	
 	public MainView() {
-		setTitle("자판기");
+		setTitle("자판기 ");
 		
 		setBounds(800,200,280,500);
 		setVisible(true);
