@@ -18,7 +18,60 @@ public class AnotherView extends JFrame{
 	
 	public AnotherView() {
 		setTitle("관리자 모드");
-		System.out.println("안녕");
+		
+		la_init = new JLabel("시재금:");
+		la_profit = new JLabel("매출:");
+		la_a_num = new JLabel("A세트 재고:");
+		la_b_num = new JLabel("B세트 재고:");
+		
+		tf_init = new JTextField();
+		tf_profit = new JTextField();
+		tf_a_num = new JTextField();
+		tf_b_num = new JTextField();
+			tf_init.setEditable(false);
+			tf_profit.setEditable(false);
+			tf_a_num.setEditable(false);
+			tf_b_num.setEditable(false);
+		
+		bt_init = new JButton("변경");
+		bt_a_num = new JButton("변경");
+		bt_b_num = new JButton("변경");
+		bt_sale = new JButton("판매 모드");
+		
+		p = new JPanel();
+			p.setBackground(Color.orange);
+			p.setSize(260,400);
+			p.setLayout(null);
+			p.add(la_init);
+			p.add(la_profit);
+			p.add(la_a_num);
+			p.add(la_b_num);
+			p.add(tf_init);
+			p.add(tf_profit);
+			p.add(tf_a_num);
+			p.add(tf_b_num);
+			p.add(bt_init);
+			p.add(bt_a_num);
+			p.add(bt_b_num);
+			p.add(bt_sale);
+			
+			la_init.setBounds(30,30,120,30);
+			la_profit.setBounds(30,70,120,30);
+			la_a_num.setBounds(30,110,120,30);
+			la_b_num.setBounds(30,150,120,30);
+			
+			tf_init.setBounds(150,30,30,30);
+			tf_profit.setBounds(150,70,30,30);
+			tf_a_num.setBounds(150,110,30,30);
+			tf_b_num.setBounds(150,150,30,30);
+			
+			bt_init.setBounds(200,30,80,30);
+			bt_a_num.setBounds(200,110,80,30);
+			bt_b_num.setBounds(200,150,80,30);
+			
+			bt_sale.setBounds(95,210,120,30);
+			
+		add(p);
 		setBounds(800,200,310,300);
 		setVisible(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
