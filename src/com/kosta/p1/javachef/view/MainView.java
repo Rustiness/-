@@ -16,7 +16,8 @@ public class MainView extends JFrame {
 	JTextArea ta;
 	
 	JLabel la_change, la_title, la_ticket;
-	JLabel la_menu1, la_menu2, la_menu3, la_menu4, la_menu5, la_menu6;
+	public JLabel la_menu1, la_menu2, la_menu3, la_menu4, la_menu5, la_menu6;
+	public JLabel la_menu_arr[] = new JLabel[6];
 
 	public JButton bt_adminView;
 	public JButton bt_menu1, bt_menu2, bt_menu3, bt_menu4, bt_menu5, bt_menu6;
@@ -79,7 +80,14 @@ public class MainView extends JFrame {
 		la_menu5.setBounds(42, 600, 70, 40);
 		la_menu6 = new JLabel("메뉴  6,500 ");
 		la_menu6.setBounds(192, 600, 70, 40);
-
+		
+		la_menu_arr[0] = la_menu1;	//메뉴 배열로 저장
+		la_menu_arr[1] = la_menu2;
+		la_menu_arr[2] = la_menu3;
+		la_menu_arr[3] = la_menu4;
+		la_menu_arr[4] = la_menu5;
+		la_menu_arr[5] = la_menu6;
+		
 		p.setLayout(null);
 		p.add(bt_adminView);
 		p.add(bt_menu1);

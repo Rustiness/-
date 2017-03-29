@@ -61,14 +61,7 @@ public class Controller  extends Thread implements ActionListener {
 	            
 	         }while(true);
 	         
-	         Vector<Item> ii = m.selectitemAll();
-	            for(int i=0; i<ii.size(); i++){
-	    			Item p = ii.get(i);
-	    			System.out.print(p.getItemName()+" ");
-	    			System.out.print(p.getItemPrice()+" ");
-	    			System.out.print(p.getItemNum()+" ");
-	    			System.out.print(p.getItemAcc()+"\n");
-	    		}
+	         this.itemView(); //자판기 상품가격 표시	         
 	            
 	         BufferedReader mbr = new BufferedReader(new FileReader("data/money.txt"));//돈의 남은 수들(돈의 정보)을 가져온다.
 
@@ -99,10 +92,10 @@ public class Controller  extends Thread implements ActionListener {
 	         Vector<Money> iii = m.selectmoneyAll();
 	            for(int i=0; i<iii.size(); i++){
 	    			Money p = iii.get(i);
-	    			System.out.print(p.getManwon_num()+" ");
-	    			System.out.print(p.getOhchunwon_num()+" ");
-	    			System.out.print(p.getChunwon_num()+" ");
-	    			System.out.print(p.getOhbaekwon_num()+"\n");
+//	    			System.out.print(p.getManwon_num()+" ");
+//	    			System.out.print(p.getOhchunwon_num()+" ");
+//	    			System.out.print(p.getChunwon_num()+" ");
+//	    			System.out.print(p.getOhbaekwon_num()+"\n");
 	    		}
 
 	      } catch (IOException e) {
@@ -110,7 +103,13 @@ public class Controller  extends Thread implements ActionListener {
 	      }
 	}
 	
-	
+	public void itemView(){ //자판기 상품명 가격 표시 메소드
+		Vector<Item> v = m.selectitemAll();
+		for(int i=0; i<v.size(); i++){
+			Item item = v.get(i);
+			m_View.la_menu_arr[i].setText(item.getItemName() + "   " + item.getItemPrice()); 
+		}
+	}//itemView
 
 	public void changeView(Object ob) {
 		if (ob == m_View.bt_adminView) {
