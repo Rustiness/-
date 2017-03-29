@@ -1,0 +1,8 @@
+itemName1=µ·°¡½º
+itemPrice1=6000
+itemNum=20
+itemAcc=0
+itemName2=°¡Ã÷µ¿
+itemPrice2=6500
+itemNum=20
+itemAcc=0
