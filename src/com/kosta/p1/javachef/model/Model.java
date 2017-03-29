@@ -3,7 +3,7 @@ package com.kosta.p1.javachef.model;
 import java.util.Vector;
 
 public class Model {
-	Vector<Item> itemV;
+	public Vector<Item> itemV;
 	Vector<Money> moneyV;
 
 	public Model() {
