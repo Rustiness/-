@@ -24,14 +24,6 @@ public class MainView extends JFrame {
 	JButton bt_cash, bt_card, bt_return;
 
 	public MainView() {
-<<<<<<< HEAD
-		setTitle("ÀÚÆÇ±â");
-		System.out.println("OH");
-		setBounds(800,200,280,500);
-		setVisible(true);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-=======
-
 		p = new JPanel();
 		p.setBackground(Color.orange);
 		ta = new JTextArea();
@@ -117,7 +109,6 @@ public class MainView extends JFrame {
 		this.setVisible(true);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
->>>>>>> a9283a358bd5584a3e6f47885517a014dcf35a46
 	}
 
 //	public static void main(String[] args) {
