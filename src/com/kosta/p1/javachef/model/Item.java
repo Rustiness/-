@@ -8,7 +8,14 @@ public class Item {// ¿⁄πŸ∫Û¡Ó
 
 	public Item() {
 
-	}
+   }
+   
+   public Item(String itemName, int itemPrice, int itemNum, int itemAcc){
+	   this.itemName = itemName;
+	   this.itemPrice = itemPrice;
+	   this.itemNum = itemNum;
+	   this.itemAcc = itemAcc;
+   }
 
 	public String getItemName() {
 		return itemName;

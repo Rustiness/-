@@ -6,8 +6,16 @@ public class Money {
 	private int chunwon_num; // Ãµ¿ø °¹¼ö
 	private int ohbaekwon_num; // ¿À¹é¿ø °¹¼ö
 
-	public Money() {
-	}
+   public Money() {
+   }
+   
+   public Money(int manwon_num, int ohchunwon_num, int chunwon_num, int ohbaekwon_num){
+	   this.manwon_num = manwon_num;
+	   this.ohchunwon_num = ohchunwon_num;
+	   this.chunwon_num = chunwon_num;
+	   this.ohbaekwon_num = ohbaekwon_num;
+   }
+	
 
 	public int getManwon_num() {
 		return manwon_num;
