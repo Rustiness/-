@@ -25,7 +25,7 @@ public class MainView extends JFrame {
 
 	public MainView() {
 		p = new JPanel();
-		p.setBackground(Color.orange);
+		p.setBackground(Color.magenta);
 		ta = new JTextArea();
 		ta.setEditable(false);
 		ta.setBounds(340, 100, 200, 300);
