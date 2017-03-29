@@ -6,6 +6,7 @@ public class Money {
 	private int chunwon_num; // Ãµ¿ø °¹¼ö
 	private int ohbaekwon_num; // ¿À¹é¿ø °¹¼ö
 
+<<<<<<< HEAD
    public Money() {
    }
    
@@ -16,6 +17,10 @@ public class Money {
 	   this.ohbaekwon_num = ohbaekwon_num;
    }
 	
+=======
+	public Money() {
+	}
+>>>>>>> a9283a358bd5584a3e6f47885517a014dcf35a46
 
 	public int getManwon_num() {
 		return manwon_num;
