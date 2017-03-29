@@ -102,6 +102,29 @@ public class Controller  extends Thread implements ActionListener {
 	         e.printStackTrace();
 	      }
 	}
+	public void remainderItems(){//재고수량을 관리자 모드에서 표시
+		ad_View.ta_inven1.setText(""+m.itemV.get(0).getItemNum());
+		ad_View.ta_inven2.setText(""+m.itemV.get(1).getItemNum());
+		ad_View.ta_inven3.setText(""+m.itemV.get(2).getItemNum());
+		ad_View.ta_inven4.setText(""+m.itemV.get(3).getItemNum());
+		ad_View.ta_inven5.setText(""+m.itemV.get(4).getItemNum());
+		ad_View.ta_inven6.setText(""+m.itemV.get(5).getItemNum());
+	}//remainderItems()
+
+	public void salesStatement(){//1번 부터 6번까지 제품이름, 재고수량, 판매수량
+		Vector<Item> itemV = m.selectitemAll(); 
+		for(int  i= 0 ; i< m.itemV.size(); i++){
+			
+				Item p = m.itemV.get(i);
+				ad_View.ta_item.append("제품이름"+"\t" +"재고수량"+"\t" + "판매수량\n"); 
+				ad_View.ta_item.append(p.getItemName()+"\t" +p.getItemNum() +"\t" + p.getItemAcc()); 
+				
+				
+				System.out.println(p.getItemName()+"\t" +p.getItemNum() +"\t" + p.getItemAcc()); //Debugging
+							p.setItemNum(p.getItemNum()+5);
+		}//for TextArea (1-6)
+		
+	}//salesStatement()
 	
 	public void itemView(){ //자판기 상품명 가격 표시 메소드
 		Vector<Item> v = m.selectitemAll();
@@ -111,11 +134,14 @@ public class Controller  extends Thread implements ActionListener {
 		}
 	}//itemView
 
+	
 	public void changeView(Object ob) {
 		if (ob == m_View.bt_adminView) {
 			m_View.setVisible(false); // 메인 숨김
 			ad_View.setLocation(600, 50);
 			ad_View.setVisible(true); // 관리자 표시
+			this.remainderItems(); //관리자모드가 바뀌자마자 재고수량 표시
+			this.salesStatement();// 매출표_제품이름_재고수량_판매수량
 		} else if (ob == ad_View.bt_mainView) {
 			ad_View.setVisible(false); // 관리자 숨김
 			m_View.setLocation(600, 50);
