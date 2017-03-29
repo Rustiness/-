@@ -10,147 +10,152 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 public class MainView extends JFrame {
 
-	JPanel p;
+	JPanel p, p_menu;
 	JScrollPane scroll;
-	DefaultTableModel dtm;
+	public DefaultTableModel dtm;
 	JTable tab;
 	int i;
 	
 	JLabel la_change, la_title, la_ticket;
 	public JLabel la_menu1, la_menu2, la_menu3, la_menu4, la_menu5, la_menu6;
 	public JLabel la_menu_arr[] = new JLabel[6];
+	public JTextField tf_total, tf_payPrice, tf_balance;
 
 	public JButton bt_adminView;
 	public JButton bt_menu1, bt_menu2, bt_menu3, bt_menu4, bt_menu5, bt_menu6;
+	public JButton bt_menu_arr[] = new JButton[6];
 	public JButton bt_final;
 	public JButton bt_cash;
 	public JButton bt_card;
 	JButton bt_return;
 
 	public MainView() {
-		p = new JPanel();
-		p.setBackground(Color.magenta);
+		
+		la_title = new JLabel("<<   자바쉐프 자판기 >.<   >>");
+		la_title.setBounds(230, 5, 200, 100);
+		la_title.setBackground(Color.blue);
+
+
+		bt_adminView = new JButton("관리자");
+		bt_adminView.setBounds(490, 20, 80, 30);
+		
+		bt_menu1 = new JButton("버튼1");
+		bt_menu1.setBounds(20, 20, 130, 100);
+		bt_menu2 = new JButton("버튼2");
+		bt_menu2.setBounds(170, 20, 130, 100);
+		bt_menu3 = new JButton("버튼3");
+		bt_menu3.setBounds(20, 170, 130, 100);
+		bt_menu4 = new JButton("버튼4");
+		bt_menu4.setBounds(170, 170, 130, 100);
+		bt_menu5 = new JButton("버튼5");
+		bt_menu5.setBounds(20, 320, 130, 100);
+		bt_menu6 = new JButton("버튼6");
+		bt_menu6.setBounds(170, 320, 130, 100);
+		bt_menu_arr[0] = bt_menu1;	//메뉴 버튼 배열로 저장
+		bt_menu_arr[1] = bt_menu2;
+		bt_menu_arr[2] = bt_menu3;
+		bt_menu_arr[3] = bt_menu4;
+		bt_menu_arr[4] = bt_menu5;
+		bt_menu_arr[5] = bt_menu6;
+
+		la_menu1 = new JLabel();
+		la_menu1.setBounds(20, 110, 120, 40);
+		la_menu2 = new JLabel();
+		la_menu2.setBounds(170, 110, 120, 40);
+		la_menu3 = new JLabel();
+		la_menu3.setBounds(20, 260, 120, 40);
+		la_menu4 = new JLabel();
+		la_menu4.setBounds(170, 260, 120, 40);
+		la_menu5 = new JLabel();
+		la_menu5.setBounds(20, 410, 120, 40);
+		la_menu6 = new JLabel();
+		la_menu6.setBounds(170, 410, 120, 40);
+		
+		la_menu_arr[0] = la_menu1;	//메뉴 라벨 배열로 저장
+		la_menu_arr[1] = la_menu2;
+		la_menu_arr[2] = la_menu3;
+		la_menu_arr[3] = la_menu4;
+		la_menu_arr[4] = la_menu5;
+		la_menu_arr[5] = la_menu6;
+
+		p_menu = new JPanel();
+		p_menu.setBounds(20, 100, 320, 450);
+		p_menu.setLayout(null);
+		p_menu.setBackground(Color.LIGHT_GRAY);
+		for(int i = 0; i < bt_menu_arr.length; i++){
+			p_menu.add(bt_menu_arr[i]);
+		}
+		for(int i = 0; i < la_menu_arr.length; i++){
+			p_menu.add(la_menu_arr[i]);
+		}
 		
 		//table 생성
 		String columnNames[] = {"메뉴", "수량", "가격"};
 		dtm = new DefaultTableModel(columnNames, 0);
 		tab = new JTable(dtm);
 		scroll = new JScrollPane(tab);
-		scroll.setBounds(340, 100, 200, 300);
+		scroll.setBounds(360, 100, 210, 210);
 		
-		la_change = new JLabel("거스름돈");
-		la_change.setOpaque(true);
-		la_change.setBackground(Color.GRAY);
-		la_title = new JLabel("<<   자바쉐프 자판기 >.<   >>");
-		la_title.setBounds(230, 5, 200, 100);
-		la_title.setBackground(Color.blue);
+		bt_final = new JButton("선택 초기화");
+		bt_final.setBounds(450, 270, 110, 30);
 
 		la_ticket = new JLabel("식권 배출구");
-		la_ticket.setBounds(50, 690, 500, 50);
+		la_ticket.setBounds(20, 570, 320, 50);
 		la_ticket.setOpaque(true);
 		la_ticket.setBackground(Color.GRAY);
 
-		bt_adminView = new JButton("관리자");
-		bt_adminView.setBounds(500, 20, 80, 30);
-		bt_menu1 = new JButton("버튼1");
-		bt_menu1.setBounds(40, 100, 100, 100);
-		bt_menu2 = new JButton("버튼2");
-		bt_menu2.setBounds(190, 100, 100, 100);
-		bt_menu3 = new JButton("버튼3");
-		bt_menu3.setBounds(40, 300, 100, 100);
-		bt_menu4 = new JButton("버튼4");
-		bt_menu4.setBounds(190, 300, 100, 100);
-		bt_menu5 = new JButton("버튼5");
-		bt_menu5.setBounds(40, 500, 100, 100);
-		bt_menu6 = new JButton("버튼6");
-		bt_menu6.setBounds(190, 500, 100, 100);
-
-		bt_final = new JButton("취소");
-		bt_final.setBounds(480, 460, 70, 30);
-
+		tf_total = new JTextField("총가격 : ");	//총 가격
+		tf_total.setBounds(360, 320, 210, 20);
+		tf_total.setEditable(false);
+		//tf_total.setEnabled(isDisplayable());
+		tf_payPrice = new JTextField("입금액 : 없음");	//입금액
+		tf_payPrice.setBounds(360, 340, 210, 20);
+		tf_payPrice.setEditable(false);
+		tf_balance = new JTextField();	// 잔금
+		tf_balance.setBounds(20, 570, 320, 50);
+		
 		bt_cash = new JButton("현금");
-		bt_cash.setBounds(350, 500, 95, 45);
+		bt_cash.setBounds(360, 380, 100, 50);
 		bt_card = new JButton("카드");
-		bt_card.setBounds(455, 500, 95, 45);
-		bt_return = new JButton("반환");
-		bt_return.setBounds(350, 555, 95, 45);
+		bt_card.setBounds(470, 380, 100, 50);
+		bt_return = new JButton("잔금 반환");
+		bt_return.setBounds(360, 440, 100, 50);
+		bt_return.setEnabled(isDisplayable());	//최초 비활성화
 
-		la_menu1 = new JLabel("메뉴  5,000 ");
-		la_menu1.setBounds(42, 200, 70, 40);
-		la_menu2 = new JLabel("메뉴  4,000 ");
-		la_menu2.setBounds(192, 200, 70, 40);
-		la_menu3 = new JLabel("메뉴  6,000 ");
-		la_menu3.setBounds(42, 400, 70, 40);
-		la_menu4 = new JLabel("메뉴  7,000 ");
-		la_menu4.setBounds(192, 400, 70, 40);
-		la_menu5 = new JLabel("메뉴  5,500 ");
-		la_menu5.setBounds(42, 600, 70, 40);
-		la_menu6 = new JLabel("메뉴  6,500 ");
-		la_menu6.setBounds(192, 600, 70, 40);
-		
-		la_menu_arr[0] = la_menu1;	//메뉴 배열로 저장
-		la_menu_arr[1] = la_menu2;
-		la_menu_arr[2] = la_menu3;
-		la_menu_arr[3] = la_menu4;
-		la_menu_arr[4] = la_menu5;
-		la_menu_arr[5] = la_menu6;
-		
+		la_change = new JLabel("잔금 반환구");
+		la_change.setBounds(360, 510, 210, 50);
+		la_change.setOpaque(true);
+		la_change.setBackground(Color.GRAY);
+
+		p = new JPanel();
+		p.setBackground(Color.magenta);
 		p.setLayout(null);
 		p.add(bt_adminView);
-		p.add(bt_menu1);
-		p.add(bt_menu2);
-		p.add(bt_menu3);
-		p.add(bt_menu4);
-		p.add(bt_menu5);
-		p.add(bt_menu6);
-
+		p.add(p_menu);
 		p.add(la_title);
+		p.add(tf_total);
+		p.add(tf_payPrice);
 		p.add(bt_final);
 		p.add(bt_cash);
 		p.add(bt_card);
 		p.add(bt_return);
 		p.add(scroll);
-		p.add(la_menu1);
-		p.add(la_menu2);
-		p.add(la_menu3);
-		p.add(la_menu4);
-		p.add(la_menu5);
-		p.add(la_menu6);
 		p.add(la_ticket);
+		p.add(la_change);
 
 		this.add(p);
-		this.setBounds(600, 50, 600, 800);
+		this.setBounds(600, 50, 600, 680);
 		this.setVisible(true);
-		this.setResizable(false);
+		//this.setResizable(false);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
-	public void display(){
-		i++;
-		Vector v = new Vector();
-		v.add("돈가스");
-		v.add(i);
-		v.add(6000*i);
-		
-		if(dtm.getRowCount()==0){
-		dtm.addRow(v);
-		return;
-		}
-				
-		for(int i=0; i<dtm.getRowCount(); i++){
-			if(dtm.getValueAt(i, 0).equals(v.get(0))) {
-				dtm.removeRow(i);
-				dtm.insertRow(i, v);
-				break;
-			}else{
-				dtm.addRow(v);
-			}
-		}
-	} //display
+
 	
 	public void clear(){
 		for(int i=0; i<dtm.getRowCount(); i++){

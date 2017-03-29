@@ -116,7 +116,7 @@ public class Controller implements ActionListener {
 	
 	private void selectMenu(Object ob) {
 		if (ob == m_View.bt_menu1) {
-			m_View.display();
+			this.display();
 		}
 	} // selectMenu
 	
