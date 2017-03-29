@@ -1,19 +1,23 @@
 package com.kosta.p1.javachef.view;
 
 import java.awt.Color;
+import java.util.Vector; //임시 벡터
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class MainView extends JFrame {
 
 	JPanel p;
 	JScrollPane scroll;
-	JTextArea ta;
+	DefaultTableModel dtm;
+	JTable tab;
+	int i;
 	
 	JLabel la_change, la_title, la_ticket;
 	public JLabel la_menu1, la_menu2, la_menu3, la_menu4, la_menu5, la_menu6;
@@ -21,16 +25,22 @@ public class MainView extends JFrame {
 
 	public JButton bt_adminView;
 	public JButton bt_menu1, bt_menu2, bt_menu3, bt_menu4, bt_menu5, bt_menu6;
-	JButton bt_final;
-	JButton bt_cash, bt_card, bt_return;
+	public JButton bt_final;
+	public JButton bt_cash;
+	public JButton bt_card;
+	JButton bt_return;
 
 	public MainView() {
 		p = new JPanel();
 		p.setBackground(Color.magenta);
-		ta = new JTextArea();
-		ta.setEditable(false);
-		ta.setBounds(340, 100, 200, 300);
-		scroll = new JScrollPane(ta);
+		
+		//table 생성
+		String columnNames[] = {"메뉴", "수량", "가격"};
+		dtm = new DefaultTableModel(columnNames, 0);
+		tab = new JTable(dtm);
+		scroll = new JScrollPane(tab);
+		scroll.setBounds(340, 100, 200, 300);
+		
 		la_change = new JLabel("거스름돈");
 		la_change.setOpaque(true);
 		la_change.setBackground(Color.GRAY);
@@ -98,7 +108,6 @@ public class MainView extends JFrame {
 		p.add(bt_menu6);
 
 		p.add(la_title);
-		p.add(ta);
 		p.add(bt_final);
 		p.add(bt_cash);
 		p.add(bt_card);
@@ -119,6 +128,51 @@ public class MainView extends JFrame {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
+	public void display(){
+		i++;
+		Vector v = new Vector();
+		v.add("돈가스");
+		v.add(i);
+		v.add(6000*i);
+		
+		if(dtm.getRowCount()==0){
+		dtm.addRow(v);
+		return;
+		}
+				
+		for(int i=0; i<dtm.getRowCount(); i++){
+			if(dtm.getValueAt(i, 0).equals(v.get(0))) {
+				dtm.removeRow(i);
+				dtm.insertRow(i, v);
+				break;
+			}else{
+				dtm.addRow(v);
+			}
+		}
+	} //display
+	
+	public void clear(){
+		for(int i=0; i<dtm.getRowCount(); i++){
+			dtm.removeRow(i);
+		}
+	} //clear
+	
+	public void cash(){
+		int i = JOptionPane.showConfirmDialog(this, "투입구에 현금을 넣어주십시오.");
+		if(i==0){
+			JOptionPane.showMessageDialog(this, "결제가 완료됐습니다.");
+			clear();
+		}
+	} //cash
+	
+	public void card(){
+		int i = JOptionPane.showConfirmDialog(this, "투입구에 카드를 넣어주십시오.");
+		if(i==0){
+			JOptionPane.showMessageDialog(this, "결제가 완료됐습니다.");
+			clear();
+		}
+	} //card
+	
 //	public static void main(String[] args) {
 //		new MainView();
 //	}

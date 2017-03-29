@@ -148,7 +148,32 @@ public class Controller  extends Thread implements ActionListener {
 			m_View.setVisible(true); // 메인 표시
 		}
 	} // changeView
-
+	
+	
+	private void selectMenu(Object ob) {
+		if (ob == m_View.bt_menu1) {
+			m_View.display();
+		}
+	} // selectMenu
+	
+	private void clearMenu(Object ob) {
+		if (ob == m_View.bt_final) {
+			m_View.clear();
+		}
+	} // clearMenu
+	
+	private void payCash(Object ob){
+		if (ob == m_View.bt_cash) {
+			m_View.cash();
+		}
+	} // payCash
+	
+	private void payCard(Object ob){
+		if (ob == m_View.bt_card) {
+			m_View.card();
+		}
+	} // payCard
+	
 	private void eventUp(){	//연결자 메소드
 		m_View.bt_adminView.addActionListener(this); //메인 -> 관리자 변경
 		ad_View.bt_mainView.addActionListener(this); //관리자 -> 자판기 변경
