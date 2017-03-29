@@ -6,6 +6,7 @@ import java.util.Vector; //юс╫ц ╨╓ем
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -155,6 +156,8 @@ public class MainView extends JFrame {
 		for(int i=0; i<dtm.getRowCount(); i++){
 			dtm.removeRow(i);
 		}
+		
+		i=0;
 	} //clear
 	
 	public void cash(){

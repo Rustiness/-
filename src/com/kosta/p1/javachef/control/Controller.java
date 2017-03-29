@@ -177,6 +177,11 @@ public class Controller  extends Thread implements ActionListener {
 	private void eventUp(){	//연결자 메소드
 		m_View.bt_adminView.addActionListener(this); //메인 -> 관리자 변경
 		ad_View.bt_mainView.addActionListener(this); //관리자 -> 자판기 변경
+		
+		m_View.bt_menu1.addActionListener(this); //메인 -> 메뉴1 버튼
+		m_View.bt_final.addActionListener(this); //메인 -> 취소 버튼
+		m_View.bt_cash.addActionListener(this); //메인 -> 현금 버튼
+		m_View.bt_card.addActionListener(this); //메인 -> 현금 버튼
 	}// eventUp
 
 	@Override
@@ -184,6 +189,11 @@ public class Controller  extends Thread implements ActionListener {
 		Object ob = e.getSource();
 		System.out.println(ob.toString()); //오브젝트 확인
 		this.changeView(ob);
+		
+		this.selectMenu(ob); //메인뷰의 메뉴 버튼 조작
+		this.clearMenu(ob); //메인뷰의 취소버튼 조작
+		this.payCash(ob); //메인뷰의 현금버튼 조작
+		this.payCard(ob); //메인뷰의 카드버튼 조작
 	}// actionPerformed
 
 	public static void main(String[] args) {
