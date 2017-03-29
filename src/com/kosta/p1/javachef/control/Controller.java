@@ -35,7 +35,7 @@ public class Controller  extends Thread implements ActionListener {
 	
 	public void run(){
 		try {
-	         BufferedReader ibr = new BufferedReader(new FileReader("item.txt"));//메뉴들의 정보 파일을 가져온다.
+	         BufferedReader ibr = new BufferedReader(new FileReader("data/item.txt"));//메뉴들의 정보 파일을 가져온다.
 	         //FileWriter fw = new FileWriter("item.txt");
 	         
 	         do{
@@ -70,7 +70,7 @@ public class Controller  extends Thread implements ActionListener {
 	    			System.out.print(p.getItemAcc()+"\n");
 	    		}
 	            
-	         BufferedReader mbr = new BufferedReader(new FileReader("money.txt"));//돈의 남은 수들(돈의 정보)을 가져온다.
+	         BufferedReader mbr = new BufferedReader(new FileReader("data/money.txt"));//돈의 남은 수들(돈의 정보)을 가져온다.
 
 	         do{
 	            String mread = mbr.readLine();//돈 파일을 한줄씩 읽는다
