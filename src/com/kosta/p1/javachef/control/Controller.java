@@ -16,54 +16,66 @@ import com.kosta.p1.javachef.model.Model;
 import com.kosta.p1.javachef.view.AdminView;
 import com.kosta.p1.javachef.view.MainView;
 
-public class Controller implements ActionListener,AdjustmentListener {
+public class Controller implements ActionListener, AdjustmentListener {
 	MainView m_View;
 	AdminView ad_View;
-	
+
 	Model m;
 	MyFile mf;
 	Vector<Object> tempV;
 	int itemCount[] = new int[6];
+	int sum;
 
 	public Controller() {
 		m_View = new MainView();
 		ad_View = new AdminView();
-		
+
 		m = new Model();
 		tempV = new Vector<>();
-		
-		mf = new MyFile(m);		
+
+		mf = new MyFile(m);
 		mf.filereader();
 
-		this.viewItemTable(); //테이블 표시
+		this.viewItemTable(); // 테이블 표시
 		this.eventUp();
-	}
-	public void remainderItems(){//재고수량을 관리자 모드에서 표시
-		Vector<Item> itemV = m.selectitemAll();
-		for(int i=0; i<itemV.size(); i++){
-			Item iv = itemV.get(i);
-		//지워야함	ad_View.ta_inven_arr[i].setText(""+iv.getItemNum()); 
-			ad_View.ta_add_arr[i].setText("제품이름"+iv.getItemName()+"\n" +"재고수량"+iv.getItemNum()+"\n" + "판매수량"+iv.getItemAcc()+"\n");
-		}
 		
-	}//remainderItems()
+		m_View.addWindowListener(new WindowAdapter() {
 
-	public void salesStatement(){//1번 부터 6번까지 제품이름, 재고수량, 판매수량 in 큰 화면
-		Vector<Item> itemV = m.selectitemAll(); 
-		for(int  i= 0 ; i< itemV.size(); i++){
-			
-				Item p = itemV.get(i);
-				ad_View.ta_item.append("제품이름"+"\t" +"판매수량"+"\t" + i+"판매액"+"\n"); 
-				ad_View.ta_item.append(p.getItemName()+" "+ p.getItemAcc()+"   "+ p.getItemPrice()*p.getItemAcc()); 
+			@Override
+			public void windowClosing(WindowEvent e) {
+				//m.itemV.get(0).setItemAcc(3);
+				mf.filewrite();
 				
-				
-				System.out.println(p.getItemName()+"\t" +p.getItemNum() +"\t" + p.getItemAcc()); //Debugging
-						
-		}//for TextArea (1-6)
-		
-	}//salesStatement()
-	
-	
+				System.exit(0);
+			}
+		});
+	}
+
+	public void remainderItems() {// 재고수량을 관리자 모드에서 표시
+		Vector<Item> itemV = m.selectitemAll();
+		for (int i = 0; i < itemV.size(); i++) {
+			Item iv = itemV.get(i);
+			// 지워야함 ad_View.ta_inven_arr[i].setText(""+iv.getItemNum());
+			ad_View.ta_add_arr[i].setText("제품이름" + iv.getItemName() + "\n" + "재고수량" + iv.getItemNum() + "\n" + "판매수량"
+					+ iv.getItemAcc() + "\n");
+		}
+
+	}// remainderItems()
+
+	public void salesStatement() {// 1번 부터 6번까지 제품이름, 재고수량, 판매수량 in 큰 화면
+		Vector<Item> itemV = m.selectitemAll();
+		for (int i = 0; i < itemV.size(); i++) {
+
+			Item p = itemV.get(i);
+			ad_View.ta_item.append("제품이름" + "\t" + "판매수량" + "\t" + i + "판매액" + "\n");
+			ad_View.ta_item.append(p.getItemName() + " " + p.getItemAcc() + "   " + p.getItemPrice() * p.getItemAcc());
+
+			System.out.println(p.getItemName() + "\t" + p.getItemNum() + "\t" + p.getItemAcc()); // Debugging
+
+		} // for TextArea (1-6)
+
+	}// salesStatement()
+
 	public void viewItemTable() { // 상품 테이블 표시 초기화
 		Vector<Item> itemV = m.selectitemAll();
 		Vector v;
@@ -131,19 +143,6 @@ public class Controller implements ActionListener,AdjustmentListener {
 		}
 	}//totalView
 
-
-	m_View.addWindowListener(new WindowAdapter() {
-
-		@Override
-		public void windowClosing(WindowEvent e) {
-			//m.itemV.get(0).setItemAcc(3);
-			mf.filewrite();
-			
-			System.exit(0);
-		}
-	});
-}
-	
 	public void changeView(Object ob) {
 		if (ob == m_View.bt_adminView) {
 			m_View.setVisible(false); // 메인 숨김
