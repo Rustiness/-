@@ -78,9 +78,9 @@ public class Controller implements ActionListener {
 
 	public void salesStatement(){//1번 부터 6번까지 제품이름, 재고수량, 판매수량 in 큰 화면
 		Vector<Item> itemV = m.selectitemAll(); 
-		for(int  i= 0 ; i< m.itemV.size(); i++){
+		for(int  i= 0 ; i< itemV.size(); i++){
 			
-				Item p = m.itemV.get(i);
+				Item p = itemV.get(i);
 				ad_View.ta_item.append("제품이름"+"\t" +"재고수량"+"\t" + "판매수량\n"); 
 				ad_View.ta_item.append(p.getItemName()+"\t" +p.getItemNum() +"\t" + p.getItemAcc()); 
 				
@@ -180,51 +180,51 @@ public class Controller implements ActionListener {
 		
 		if(ob == ad_View.bt_add1){//1번 재고수량 추가 버튼
 			
-			m.itemV.get(0).setItemNum(m.itemV.get(0).getItemNum()+ad_View.scroll_inven1.getValue());
+			itemV.get(0).setItemNum(itemV.get(0).getItemNum()+ad_View.scroll_inven1.getValue());
 		
 		}else if(ob == ad_View.bt_add2){//2번 재고수량 추가 버튼
 			
-			m.itemV.get(1).setItemNum(m.itemV.get(1).getItemNum()+ad_View.scroll_inven2.getValue());
+			itemV.get(1).setItemNum(itemV.get(1).getItemNum()+ad_View.scroll_inven2.getValue());
 		
 		}else if(ob == ad_View.bt_add3){//3번 재고수량 추가 버튼
 			
-			m.itemV.get(2).setItemNum(m.itemV.get(2).getItemNum()+ad_View.scroll_inven3.getValue());
+			itemV.get(2).setItemNum(itemV.get(2).getItemNum()+ad_View.scroll_inven3.getValue());
 		
 		}else if(ob == ad_View.bt_add4){//4번 재고수량 추가 버튼
 			
-			m.itemV.get(3).setItemNum(m.itemV.get(3).getItemNum()+ad_View.scroll_inven4.getValue());
+			itemV.get(3).setItemNum(itemV.get(3).getItemNum()+ad_View.scroll_inven4.getValue());
 		
 		}else if(ob == ad_View.bt_add5){//5번 재고수량 추가 버튼
 			
-			m.itemV.get(4).setItemNum(m.itemV.get(4).getItemNum()+ad_View.scroll_inven5.getValue());
+			itemV.get(4).setItemNum(itemV.get(4).getItemNum()+ad_View.scroll_inven5.getValue());
 		
 		}else if(ob == ad_View.bt_add6){//6번 재고수량 추가 버튼
 			
-			m.itemV.get(5).setItemNum(m.itemV.get(5).getItemNum()+ad_View.scroll_inven6.getValue());
+			itemV.get(5).setItemNum(itemV.get(5).getItemNum()+ad_View.scroll_inven6.getValue());
 		
 		}else if(ob == ad_View.bt_minus1){//1번 재고수량 회수 버튼
 			
-			m.itemV.get(0).setItemNum(m.itemV.get(0).getItemNum()-ad_View.scroll_inven1.getValue());
+			itemV.get(0).setItemNum(itemV.get(0).getItemNum()-ad_View.scroll_inven1.getValue());
 		
 		}else if(ob == ad_View.bt_minus2){//2번 재고수량 회수 버튼
 			
-			m.itemV.get(1).setItemNum(m.itemV.get(1).getItemNum()-ad_View.scroll_inven2.getValue());
+			itemV.get(1).setItemNum(itemV.get(1).getItemNum()-ad_View.scroll_inven2.getValue());
 		
 		}else if(ob == ad_View.bt_minus3){//3번 재고수량 회수 버튼
 			
-			m.itemV.get(2).setItemNum(m.itemV.get(2).getItemNum()-ad_View.scroll_inven3.getValue());
+			itemV.get(2).setItemNum(itemV.get(2).getItemNum()-ad_View.scroll_inven3.getValue());
 		
 		}else if(ob == ad_View.bt_minus4){//4번 재고수량 회수 버튼
 			
-			m.itemV.get(3).setItemNum(m.itemV.get(3).getItemNum()-ad_View.scroll_inven4.getValue());
+			itemV.get(3).setItemNum(itemV.get(3).getItemNum()-ad_View.scroll_inven4.getValue());
 		
 		}else if(ob == ad_View.bt_minus5){//5번 재고수량 회수 버튼
 			
-			m.itemV.get(4).setItemNum(m.itemV.get(4).getItemNum()-ad_View.scroll_inven5.getValue());
+			itemV.get(4).setItemNum(itemV.get(4).getItemNum()-ad_View.scroll_inven5.getValue());
 		
 		}else if(ob == ad_View.bt_minus6){//6번 재고수량 회수 버튼
 			
-			m.itemV.get(5).setItemNum(m.itemV.get(5).getItemNum()-ad_View.scroll_inven6.getValue());
+			itemV.get(5).setItemNum(itemV.get(5).getItemNum()-ad_View.scroll_inven6.getValue());
 		
 		}//관리자 button 추가, 삭제
 	}// actionPerformed
