@@ -120,11 +120,15 @@ public class Controller implements ActionListener {
 
 	public void totalView(){  //총매출 표시 메소드 in 관리자
 		Vector<Item> itemV = m.selectitemAll();
+		   int salesMoney=0;
 		for(int i =0; i<itemV.size(); i++){
 			Item iv = itemV.get(i);
-			ad_View.la_
+			salesMoney = iv.getItemAcc()* iv.getItemPrice();
+			sum += salesMoney;
+			ad_View.la_total.setText("" +sum);
 		}
 	}//totalView
+
 
 	m_View.addWindowListener(new WindowAdapter() {
 
