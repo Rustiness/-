@@ -1,6 +1,8 @@
 package com.kosta.p1.javachef.view;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.util.Vector; //임시 벡터
 
 import javax.swing.ImageIcon;
@@ -57,6 +59,23 @@ public class MainView extends JFrame {
 		bt_menu5.setBounds(20, 320, 130, 100);
 		bt_menu6 = new JButton(new ImageIcon("data/menu6.jpg"));
 		bt_menu6.setBounds(170, 320, 130, 100);
+		
+		//메뉴버튼에 커서가 올라가면 체크 표시가 나옴
+		bt_menu1.setRolloverIcon(new ImageIcon("data/check.png"));
+		bt_menu2.setRolloverIcon(new ImageIcon("data/check.png"));
+		bt_menu3.setRolloverIcon(new ImageIcon("data/check.png"));
+		bt_menu4.setRolloverIcon(new ImageIcon("data/check.png"));
+		bt_menu5.setRolloverIcon(new ImageIcon("data/check.png"));
+		bt_menu6.setRolloverIcon(new ImageIcon("data/check.png"));
+		
+		//메뉴버튼을 클릭하면 체크 표시가 나옴
+		bt_menu1.setPressedIcon(new ImageIcon("data/check2.jpg"));
+		bt_menu2.setPressedIcon(new ImageIcon("data/check2.jpg"));
+		bt_menu3.setPressedIcon(new ImageIcon("data/check2.jpg"));
+		bt_menu4.setPressedIcon(new ImageIcon("data/check2.jpg"));
+		bt_menu5.setPressedIcon(new ImageIcon("data/check2.jpg"));
+		bt_menu6.setPressedIcon(new ImageIcon("data/check2.jpg"));
+		
 		bt_menu_arr[0] = bt_menu1;	//메뉴 버튼 배열로 저장
 		bt_menu_arr[1] = bt_menu2;
 		bt_menu_arr[2] = bt_menu3;
@@ -77,6 +96,13 @@ public class MainView extends JFrame {
 		la_menu6 = new JLabel();
 		la_menu6.setBounds(170, 410, 120, 40);
 		
+		la_menu1.setOpaque(true);
+		la_menu2.setOpaque(true);
+		la_menu3.setOpaque(true);
+		la_menu4.setOpaque(true);
+		la_menu5.setOpaque(true);
+		la_menu6.setOpaque(true);
+		
 		la_menu_arr[0] = la_menu1;	//메뉴 라벨 배열로 저장
 		la_menu_arr[1] = la_menu2;
 		la_menu_arr[2] = la_menu3;
@@ -84,10 +110,19 @@ public class MainView extends JFrame {
 		la_menu_arr[4] = la_menu5;
 		la_menu_arr[5] = la_menu6;
 
-		p_menu = new JPanel();
+		//메뉴 패널 안에 이미지 넣기
+		ImageIcon p_menu_image = new ImageIcon("data/p_menu_image.jpg");//이미지 아이콘 객체 생성
+				
+		p_menu = new JPanel(){
+			public void paintComponent(Graphics g) {
+		        Dimension d = getSize();
+		        g.drawImage(p_menu_image.getImage(), 0, 0, d.width, d.height, null);
+		    }
+		};//패널의 크기에 맞게 이미지 삽입
+		
 		p_menu.setBounds(20, 100, 320, 450);
 		p_menu.setLayout(null);
-		p_menu.setBackground(Color.LIGHT_GRAY);
+		
 		for(int i = 0; i < bt_menu_arr.length; i++){
 			p_menu.add(bt_menu_arr[i]);
 		}
@@ -132,8 +167,17 @@ public class MainView extends JFrame {
 		la_change.setBounds(360, 510, 210, 50);
 		la_change.setOpaque(true);
 		la_change.setBackground(Color.GRAY);
-
-		p = new JPanel();
+		
+		//바탕 패널 안에 이미지 넣기
+		ImageIcon p_image = new ImageIcon("data/restaurant.jpg");//이미지 아이콘 객체 생성
+		
+		p = new JPanel(){
+            public void paintComponent(Graphics g) {
+            	Dimension d = getSize();
+                g.drawImage(p_image.getImage(), 0, 0, d.width, d.height, null);
+            }
+		};//패널의 크기에 맞게 이미지 삽입
+		
 		p.setBackground(Color.magenta);
 		p.setLayout(null);
 		p.add(bt_adminView);
@@ -184,5 +228,5 @@ public class MainView extends JFrame {
 	
 //	public static void main(String[] args) {
 //		new MainView();
-//	} - 작업확인용
+//	}
 }
