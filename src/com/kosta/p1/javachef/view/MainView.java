@@ -3,6 +3,7 @@ package com.kosta.p1.javachef.view;
 import java.awt.Color;
 import java.util.Vector; //임시 벡터
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -44,7 +45,7 @@ public class MainView extends JFrame {
 		bt_adminView = new JButton("관리자");
 		bt_adminView.setBounds(490, 20, 80, 30);
 		
-		bt_menu1 = new JButton("버튼1");
+		bt_menu1 = new JButton(new ImageIcon("menu1.jpg"));
 		bt_menu1.setBounds(20, 20, 130, 100);
 		bt_menu2 = new JButton("버튼2");
 		bt_menu2.setBounds(170, 20, 130, 100);
