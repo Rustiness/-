@@ -45,17 +45,17 @@ public class MainView extends JFrame {
 		bt_adminView = new JButton("관리자");
 		bt_adminView.setBounds(490, 20, 80, 30);
 		
-		bt_menu1 = new JButton(new ImageIcon("menu1.jpg"));
+		bt_menu1 = new JButton(new ImageIcon("data/menu1.jpg"));
 		bt_menu1.setBounds(20, 20, 130, 100);
-		bt_menu2 = new JButton(new ImageIcon("menu2.jpg"));
+		bt_menu2 = new JButton(new ImageIcon("data/menu2.jpg"));
 		bt_menu2.setBounds(170, 20, 130, 100);
-		bt_menu3 = new JButton(new ImageIcon("menu3.jpg"));
+		bt_menu3 = new JButton(new ImageIcon("data/menu3.jpg"));
 		bt_menu3.setBounds(20, 170, 130, 100);
-		bt_menu4 = new JButton(new ImageIcon("menu4.jpg"));
+		bt_menu4 = new JButton(new ImageIcon("data/menu4.jpg"));
 		bt_menu4.setBounds(170, 170, 130, 100);
-		bt_menu5 = new JButton(new ImageIcon("menu5.jpg"));
+		bt_menu5 = new JButton(new ImageIcon("data/menu5.jpg"));
 		bt_menu5.setBounds(20, 320, 130, 100);
-		bt_menu6 = new JButton(new ImageIcon("menu6.jpg"));
+		bt_menu6 = new JButton(new ImageIcon("data/menu6.jpg"));
 		bt_menu6.setBounds(170, 320, 130, 100);
 		bt_menu_arr[0] = bt_menu1;	//메뉴 버튼 배열로 저장
 		bt_menu_arr[1] = bt_menu2;
@@ -182,7 +182,7 @@ public class MainView extends JFrame {
 		}
 	} //card
 	
-	public static void main(String[] args) {
-		new MainView();
-	}
+//	public static void main(String[] args) {
+//		new MainView();
+//	} - 작업확인용
 }
