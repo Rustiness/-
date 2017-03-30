@@ -152,7 +152,7 @@ public class MainView extends JFrame {
 		this.add(p);
 		this.setBounds(600, 50, 600, 680);
 		this.setVisible(true);
-		//this.setResizable(false);
+		this.setResizable(false);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
@@ -184,5 +184,5 @@ public class MainView extends JFrame {
 	
 //	public static void main(String[] args) {
 //		new MainView();
-//	} - 작업확인용
+//	}
 }
