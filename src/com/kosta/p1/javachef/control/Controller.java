@@ -31,7 +31,7 @@ public class Controller implements ActionListener {
 		Vector<Item> itemV = m.selectitemAll();
 		for(int i=0; i<itemV.size(); i++){
 			Item iv = itemV.get(i);
-			ad_View.ta_inven_arr[i].setText(""+iv.getItemNum()); 
+		//지워야함	ad_View.ta_inven_arr[i].setText(""+iv.getItemNum()); 
 			ad_View.ta_add_arr[i].setText("제품이름"+iv.getItemName()+"\n" +"재고수량"+iv.getItemNum()+"\n" + "판매수량"+iv.getItemAcc()+"\n");
 		}
 		
@@ -42,8 +42,8 @@ public class Controller implements ActionListener {
 		for(int  i= 0 ; i< itemV.size(); i++){
 			
 				Item p = itemV.get(i);
-				ad_View.ta_item.append("제품이름"+"\t" +"재고수량"+"\t" + "판매수량\n"); 
-				ad_View.ta_item.append(p.getItemName()+"\t" +p.getItemNum() +"\t" + p.getItemAcc()); 
+				ad_View.ta_item.append("제품이름"+"\t" +"판매수량"+"\t" + i+"판매액"+"\n"); 
+				ad_View.ta_item.append(p.getItemName()+" "+ p.getItemAcc()+"   "+ p.getItemPrice()*p.getItemAcc()); 
 				
 				
 				System.out.println(p.getItemName()+"\t" +p.getItemNum() +"\t" + p.getItemAcc()); //Debugging
@@ -59,6 +59,14 @@ public class Controller implements ActionListener {
 			m_View.la_menu_arr[i].setText(item.getItemName() + "   " + item.getItemPrice()); 
 		}
 	}//itemView
+
+	public void totalView(){  //총매출 표시 메소드 in 관리자
+		Vector<Item> itemV = m.selectitemAll();
+		for(int i =0; i<itemV.size(); i++){
+			Item iv = itemV.get(i);
+			ad_View.la_
+		}
+	}//totalView
 
 	m_View.addWindowListener(new WindowAdapter() {
 
