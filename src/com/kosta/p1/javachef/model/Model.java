@@ -2,6 +2,8 @@ package com.kosta.p1.javachef.model;
 
 import java.util.Vector;
 
+import com.kosta.p1.javachef.control.MyFile;
+
 public class Model{
 	public Vector<Item> itemV;
 	Item it;
@@ -10,8 +12,13 @@ public class Model{
 		itemV = new Vector<>();
 
 	}
+	
+	public void inserttotal(int total){
+		Total t = new Total(total);
+		System.out.println(t.getTotal());
+	}
 
-	public void insert(Item item) {
+	public void insertitem(Item item) {
 		itemV.add(item);
 	}
 
@@ -19,31 +26,19 @@ public class Model{
 		return itemV;
 	}	
 	
-	public void updateItem(String itemName, int itemAcc, int total){
+	public void updateItem(String itemName, int itemAcc){
 		
 		for(int i=0;i<itemV.size();i++){
 			
 			it=itemV.get(i);
 			     
-			  if(itemName.equals(it.getItemName())){
-				  
-				  
-				  it.setItemAcc(it.getItemAcc()+itemAcc);             
+			  if(it.getItemName().equals(itemName)){
 				  it.setItemNum(it.getItemNum()-itemAcc);
+				  it.setItemAcc(it.getItemAcc()+itemAcc);  
 				  
-				  //start();
-				  
-				  
-			  }//if
-			
-			
+			  }//if			
 		}//for
-		
-		
 	}//updateItem
 	
-	public static void main(String[] args) {
-		new Model();
-	}
-	
+
 }

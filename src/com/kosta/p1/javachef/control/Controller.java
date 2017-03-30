@@ -2,12 +2,9 @@ package com.kosta.p1.javachef.control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Vector;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-import com.kosta.p1.javachef.model.Item;
 import com.kosta.p1.javachef.model.Model;
 import com.kosta.p1.javachef.view.AdminView;
 import com.kosta.p1.javachef.view.MainView;
@@ -17,53 +14,17 @@ public class Controller implements ActionListener {
 	AdminView ad_View;
 	
 	Model m;
-	Vector<String> iv;//iv:메뉴 잠시 저장하는 벡터, mv:돈 잠시 저장하는 벡터
+	MyFile mf;
 
 	public Controller() {
 		m_View = new MainView();
 		ad_View = new AdminView();
 		
 		m = new Model();
-		iv = new Vector<>();
 		
-		try {
-	         BufferedReader ibr = new BufferedReader(new FileReader("data/item.txt"));//메뉴들의 정보 파일을 가져온다.
-	         //FileWriter ifw = new FileWriter("data/item.txt");
-	         
-	         do{
-	            String iread = ibr.readLine();//메뉴 파일을 한줄씩 읽는다
-	            if(iread==null) break;//값이 없으면 더이상 읽지 않는다
-	            
-	            iv.add(iread);//인덱스1을 itemV벡터에 차례대로 넣는다
+		mf = new MyFile(m);		
+		mf.filereader();
 
-	            if(iv.size()==4){//itemV의 크기가 4가 되면
-	            	String itemName = iv.get(0);
-	            	int itemPrice = Integer.parseInt(iv.get(1));
-	            	int itemNum = Integer.parseInt(iv.get(2));
-	            	int itemAcc = Integer.parseInt(iv.get(3));
-	            	
-	            	Item item = new Item(itemName, itemPrice, itemNum, itemAcc);
-	            	
-	            	m.insert(item);
-	               
-	            	iv.removeAllElements();//하나의 메뉴 itemV가 생성되면 모두 지워 다른 메뉴를 넣을 준비를 한다.
-	            }
-	            
-	         }while(true);
-	         
-	         Vector<Item> ii = m.selectitemAll();
-	            for(int i=0; i<ii.size(); i++){
-	    			Item p = ii.get(i);
-	    			System.out.print(p.getItemName()+" ");
-	    			System.out.print(p.getItemPrice()+" ");
-	    			System.out.print(p.getItemNum()+" ");
-	    			System.out.print(p.getItemAcc()+"\n");
-	    		}
-
-	      } catch (IOException e) {
-	         e.printStackTrace();
-	      }
-		
 		this.eventUp();
 	}
 	public void remainderItems(){//재고수량을 관리자 모드에서 표시
@@ -99,6 +60,17 @@ public class Controller implements ActionListener {
 		}
 	}//itemView
 
+	m_View.addWindowListener(new WindowAdapter() {
+
+		@Override
+		public void windowClosing(WindowEvent e) {
+			//m.itemV.get(0).setItemAcc(3);
+			mf.filewrite();
+			
+			System.exit(0);
+		}
+	});
+}
 	
 	public void changeView(Object ob) {
 		if (ob == m_View.bt_adminView) {

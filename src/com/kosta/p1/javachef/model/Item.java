@@ -48,8 +48,5 @@ public class Item {// ¿⁄πŸ∫Û¡Ó
 	public void setItemAcc(int itemAcc) {
 		this.itemAcc = itemAcc;
 	}
-
-	public static void main(String[] args) {
-		new Item();
-	}
+	
 }
