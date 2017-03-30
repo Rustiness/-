@@ -7,6 +7,7 @@ import com.kosta.p1.javachef.control.MyFile;
 public class Model{
 	public Vector<Item> itemV;
 	Item it;
+	public Total t;
 	
 	public Model() {
 		itemV = new Vector<>();
@@ -14,7 +15,7 @@ public class Model{
 	}
 	
 	public void inserttotal(int total){
-		Total t = new Total(total);
+		t = new Total(total);
 		System.out.println(t.getTotal());
 	}
 

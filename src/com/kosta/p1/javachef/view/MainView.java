@@ -184,5 +184,5 @@ public class MainView extends JFrame {
 	
 //	public static void main(String[] args) {
 //		new MainView();
-//	}
+//	} - 작업확인용
 }

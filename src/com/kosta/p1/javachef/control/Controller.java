@@ -39,6 +39,8 @@ public class Controller implements ActionListener, AdjustmentListener {
 		this.viewItemTable(); // 테이블 표시
 		this.eventUp();
 		
+		totalView();
+		
 		m_View.addWindowListener(new WindowAdapter() {
 
 			@Override
@@ -69,8 +71,8 @@ public class Controller implements ActionListener, AdjustmentListener {
 				Item p = itemV.get(i);
 			
 				ad_View.ta_item.append(p.getItemName()+" "+ p.getItemAcc()+"   "+ p.getItemPrice()*p.getItemAcc()); 
-				
-				this.totalView();
+
+				//this.totalView();
 				System.out.println(p.getItemName()+"\t" +p.getItemNum() +"\t" + p.getItemAcc()); //Debugging
 						
 		}//for TextArea (1-6)
@@ -135,14 +137,10 @@ public class Controller implements ActionListener, AdjustmentListener {
 	}// itemView
 
 	public void totalView(){  //총매출 표시 메소드 in 관리자
-		Vector<Item> itemV = m.selectitemAll();
-		   int salesMoney=0;
-		for(int i =0; i<itemV.size(); i++){
-			Item iv = itemV.get(i);
-			salesMoney = iv.getItemAcc()* iv.getItemPrice();
-			sum += salesMoney;
-			}//for
-		ad_View.la_total.setText("" +sum);
+		
+		
+		String str = "총 매출액: "+m.t.getTotal()+"원";
+		ad_View.tf_total.setText(str);
 	}//totalView
 
 

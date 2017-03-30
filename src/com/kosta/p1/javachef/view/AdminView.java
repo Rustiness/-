@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollBar;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.JTextArea;
 
 public class AdminView extends JFrame {
@@ -21,7 +22,8 @@ public class AdminView extends JFrame {
 	public JTextArea  ta_inven1, ta_inven2, ta_inven3, ta_inven4, ta_inven5, ta_inven6;//재고수량
 	public JTextArea ta_inven_arr[] = new JTextArea[6];
 	
-	public JLabel la_top,la_sale1, la_sale2, la_sale3, la_sale4, la_sale5, la_sale6, la_saletotal, la_ready, la_total;
+	public JTextField tf_total;
+	public JLabel la_top,la_sale1, la_sale2, la_sale3, la_sale4, la_sale5, la_sale6, la_saletotal, la_ready;
 	public JTextArea ta_item;
 	public JScrollBar scroll_inven1, scroll_inven2, scroll_inven3, scroll_inven4, scroll_inven5, scroll_inven6;
 	public JButton bt_add1, bt_minus1,bt_add2, bt_minus2, bt_add3, bt_minus3, bt_add4, bt_minus4, bt_add5, bt_minus5, bt_add6, bt_minus6;
@@ -58,12 +60,12 @@ public class AdminView extends JFrame {
 		ta_add6.setBackground(Color.ORANGE );
         
 //				//Addition
-//				ta_add_arr[0] = ta_add1;
-//				ta_add_arr[1] = ta_add2;
-//				ta_add_arr[2] = ta_add3;
-//				ta_add_arr[3] = ta_add4;
-//				ta_add_arr[4] = ta_add5;
-//				ta_add_arr[5] = ta_add6;
+				ta_add_arr[0] = ta_add1;
+				ta_add_arr[1] = ta_add2;
+				ta_add_arr[2] = ta_add3;
+				ta_add_arr[3] = ta_add4;
+				ta_add_arr[4] = ta_add5;
+				ta_add_arr[5] = ta_add6;
 				
 		
 		bt_add1 = new JButton("추가");
@@ -136,8 +138,8 @@ public class AdminView extends JFrame {
 
 		la_ready = new JLabel("시재: ");
 		la_ready.setBounds(330, 625, 100, 50);
-		la_total = new JLabel("금일 매출액: ");
-		la_total.setBounds(330, 685, 200, 50);
+		tf_total = new JTextField();
+		tf_total.setBounds(330, 685, 200, 50);
 		bt_return = new JButton("회수");
 		bt_return.setBounds(480, 635, 60, 30);
 
@@ -157,7 +159,7 @@ public class AdminView extends JFrame {
 		add(ta_inven6);
 		add(ta_item);
 		add(la_ready);
-		add(la_total);
+		add(tf_total);
 		add(bt_return);
 		add(scroll_inven1);
 		add(scroll_inven2);
