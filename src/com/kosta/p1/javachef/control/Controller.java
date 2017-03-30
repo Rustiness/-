@@ -57,20 +57,23 @@ public class Controller implements ActionListener, AdjustmentListener {
 		Vector<Item> itemV = m.selectitemAll();
 		for (int i = 0; i < itemV.size(); i++) {
 			Item iv = itemV.get(i);
+	
+			ad_View.ta_add_arr[i].setText("제품이름:\n"+iv.getItemName()+ "\n"+"재고수량:"+iv.getItemNum()+"\n" + "판매수량:"+iv.getItemAcc()+"\n");
+			}
 		
-			ad_View.ta_add_arr[i].setText("제품이름"+iv.getItemName()+"\n" +"재고수량"+iv.getItemNum()+"\n" + "판매수량"+iv.getItemAcc()+"\n");
-		}
-
-	}// remainderItems()
+	}//remainderItems()
 
 	public void salesStatement(){//1번 부터 6번까지 제품이름, 재고수량, 판매수량 in 큰 화면
 		Vector<Item> itemV = m.selectitemAll(); 
-		ad_View.ta_item.append("제품이름"+"  " +"판매수량"+"  " + "판매액"+"\n"); 
+		 
 		for(int  i= 0 ; i< itemV.size(); i++){
 			
 				Item p = itemV.get(i);
 			
-				ad_View.ta_item.append(p.getItemName()+" "+ p.getItemAcc()+"   "+ p.getItemPrice()*p.getItemAcc()); 
+				ad_View.ta_item.append("           ▶"+"제품이름"+"  "+ p.getItemName()+"\n");
+				ad_View.ta_item.append("               "+"판매수량"+"  "+  p.getItemAcc()+"\n");
+				ad_View.ta_item.append("               "+"판매금액"+"  "+ p.getItemPrice()*p.getItemAcc()+"\n");
+				ad_View.ta_item.append("\n ");
 
 				//this.totalView();
 				System.out.println(p.getItemName()+"\t" +p.getItemNum() +"\t" + p.getItemAcc()); //Debugging

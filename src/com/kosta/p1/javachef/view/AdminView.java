@@ -70,33 +70,33 @@ public class AdminView extends JFrame {
 		
 		bt_add1 = new JButton("추가");
 		bt_add1.setBounds(30, 260, 60, 30);
-		bt_minus1 = new JButton("회수");
+		bt_minus1 = new JButton("빼기");
 		bt_minus1.setBounds(90, 260, 60, 30);
 		bt_add2 = new JButton("추가");
 		bt_add2.setBounds(182, 260, 60, 30);
-		bt_minus2 = new JButton("회수");
+		bt_minus2 = new JButton("빼기");
 		bt_minus2.setBounds(242, 260, 60, 30);
 		bt_add3 = new JButton("추가");
 		bt_add3.setBounds(30, 460, 60, 30);
-		bt_minus3 = new JButton("회수");
+		bt_minus3 = new JButton("빼기");
 		bt_minus3.setBounds(90, 460, 60, 30);
 		bt_add4 = new JButton("추가");
 		bt_add4.setBounds(182, 460, 60, 30);
-		bt_minus4 = new JButton("회수");
+		bt_minus4 = new JButton("빼기");
 		bt_minus4.setBounds(242, 460, 60, 30);
 		bt_add5 = new JButton("추가");
 		bt_add5.setBounds(30, 660, 60, 30);
-		bt_minus5 = new JButton("회수");
+		bt_minus5 = new JButton("빼기");
 		bt_minus5.setBounds(90, 660, 60, 30);
 		bt_add6 = new JButton("추가");
 		bt_add6.setBounds(182, 660, 60, 30);
-		bt_minus6 = new JButton("회수");
+		bt_minus6 = new JButton("빼기");
 		bt_minus6.setBounds(242, 660, 60, 30);
 		
 				
 		ta_item = new JTextArea();
 		ta_item.setEditable(false);
-		ta_item.setBounds(340, 100, 200, 250);
+		ta_item.setBounds(340, 100, 200, 430);
 
 		ta_inven1 = new JTextArea();
 		ta_inven1.setBounds(42, 200, 40, 20);
@@ -136,8 +136,8 @@ public class AdminView extends JFrame {
        la_saletotal=new JLabel("아이템 총 판매량: ");   
        */   
 
-		la_ready = new JLabel("시재: ");
-		la_ready.setBounds(330, 625, 100, 50);
+//		la_ready = new JLabel("시재: ");
+//		la_ready.setBounds(330, 625, 100, 50);
 		tf_total = new JTextField();
 		tf_total.setBounds(330, 685, 200, 50);
 		bt_return = new JButton("회수");
@@ -158,7 +158,7 @@ public class AdminView extends JFrame {
 		add(ta_inven5);
 		add(ta_inven6);
 		add(ta_item);
-		add(la_ready);
+//		add(la_ready);
 		add(tf_total);
 		add(bt_return);
 		add(scroll_inven1);
