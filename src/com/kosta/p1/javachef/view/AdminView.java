@@ -1,6 +1,7 @@
 package com.kosta.p1.javachef.view;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Scrollbar;
 
 import javax.swing.ImageIcon;
@@ -25,11 +26,14 @@ public class AdminView extends JFrame {
 	public JScrollBar scroll_inven1, scroll_inven2, scroll_inven3, scroll_inven4, scroll_inven5, scroll_inven6;
 	public JButton bt_add1, bt_minus1,bt_add2, bt_minus2, bt_add3, bt_minus3, bt_add4, bt_minus4, bt_add5, bt_minus5, bt_add6, bt_minus6;
 	ImageIcon bt1;
-
+    public Font f1;
+	
 	public AdminView() {
 
-		la_top = new JLabel("<<관리자용>>");
-		la_top.setBounds(260, 5, 100, 100);
+		f1 = new Font("돋움",Font.PLAIN,20);
+		la_top = new JLabel("<< 관리자용 >> ^^");
+		la_top.setFont(f1);
+		la_top.setBounds(200, 30, 300, 50);
 		bt_mainView = new JButton("메인");
 		bt_mainView.setBounds(500, 20, 80, 30);
 
@@ -53,27 +57,39 @@ public class AdminView extends JFrame {
 		ta_add6.setBounds(190, 500, 100, 100);
 		ta_add6.setBackground(Color.ORANGE );
         
-				//Addition
-				ta_add_arr[0] = ta_add1;
-				ta_add_arr[1] = ta_add2;
-				ta_add_arr[2] = ta_add3;
-				ta_add_arr[3] = ta_add4;
-				ta_add_arr[4] = ta_add5;
-				ta_add_arr[5] = ta_add6;
+//				//Addition
+//				ta_add_arr[0] = ta_add1;
+//				ta_add_arr[1] = ta_add2;
+//				ta_add_arr[2] = ta_add3;
+//				ta_add_arr[3] = ta_add4;
+//				ta_add_arr[4] = ta_add5;
+//				ta_add_arr[5] = ta_add6;
 				
 		
 		bt_add1 = new JButton("추가");
+		bt_add1.setBounds(30, 260, 60, 30);
 		bt_minus1 = new JButton("회수");
+		bt_minus1.setBounds(90, 260, 60, 30);
 		bt_add2 = new JButton("추가");
+		bt_add2.setBounds(182, 260, 60, 30);
 		bt_minus2 = new JButton("회수");
+		bt_minus2.setBounds(242, 260, 60, 30);
 		bt_add3 = new JButton("추가");
+		bt_add3.setBounds(30, 460, 60, 30);
 		bt_minus3 = new JButton("회수");
+		bt_minus3.setBounds(90, 460, 60, 30);
 		bt_add4 = new JButton("추가");
+		bt_add4.setBounds(182, 460, 60, 30);
 		bt_minus4 = new JButton("회수");
+		bt_minus4.setBounds(242, 460, 60, 30);
 		bt_add5 = new JButton("추가");
+		bt_add5.setBounds(30, 660, 60, 30);
 		bt_minus5 = new JButton("회수");
+		bt_minus5.setBounds(90, 660, 60, 30);
 		bt_add6 = new JButton("추가");
+		bt_add6.setBounds(182, 660, 60, 30);
 		bt_minus6 = new JButton("회수");
+		bt_minus6.setBounds(242, 660, 60, 30);
 		
 				
 		ta_item = new JTextArea();
@@ -81,38 +97,33 @@ public class AdminView extends JFrame {
 		ta_item.setBounds(340, 100, 200, 250);
 
 		ta_inven1 = new JTextArea();
-		ta_inven1.setBounds(42, 200, 40, 40);
+		ta_inven1.setBounds(42, 200, 40, 20);
 		ta_inven2 = new JTextArea();
-		ta_inven2.setBounds(192, 200, 40, 40);
+		ta_inven2.setBounds(192, 200, 40, 20);
 		ta_inven3 = new JTextArea();
-		ta_inven3.setBounds(42, 400, 40, 40);
+		ta_inven3.setBounds(42, 400, 40, 20);
 		ta_inven4 = new JTextArea();
-		ta_inven4.setBounds(192, 400, 40, 40);
+		ta_inven4.setBounds(192, 400, 40, 20);
 		ta_inven5 = new JTextArea();
-		ta_inven5.setBounds(42, 600, 40, 40);
+		ta_inven5.setBounds(42, 600, 40, 20);
 		ta_inven6 = new JTextArea();
-		ta_inven6.setBounds(192, 600, 40, 40);
+		ta_inven6.setBounds(192, 600, 40, 20);
 		
-			//Addition
-			ta_inven_arr[0] = ta_inven1;
-			ta_inven_arr[1] = ta_inven2;
-			ta_inven_arr[2] = ta_inven3;
-			ta_inven_arr[3] = ta_inven4;
-			ta_inven_arr[4] = ta_inven5;
-			ta_inven_arr[5] = ta_inven6;
+			
 
-		scroll_inven1 = new JScrollBar(Scrollbar.HORIZONTAL, 0, 2, 0, 10);
-		scroll_inven2 = new JScrollBar(Scrollbar.HORIZONTAL, 0, 2, 0, 10);
-		scroll_inven3 = new JScrollBar(Scrollbar.HORIZONTAL, 0, 2, 0, 10);
-		scroll_inven4 = new JScrollBar(Scrollbar.HORIZONTAL, 0, 2, 0, 10);
-		scroll_inven5 = new JScrollBar(Scrollbar.HORIZONTAL, 0, 2, 0, 10);
-		scroll_inven6 = new JScrollBar(Scrollbar.HORIZONTAL, 0, 2, 0, 10);
-		scroll_inven1.setBounds(40,250,100,20);
-		scroll_inven2.setBounds(190,250,100,20);
-		scroll_inven3.setBounds(40,450,100,20);
-		scroll_inven4.setBounds(190,450,100,20);
-		scroll_inven5.setBounds(40,650,100,20);
-		scroll_inven6.setBounds(190,650,100,20);
+		scroll_inven1 = new JScrollBar(Scrollbar.HORIZONTAL, 0, 2, 0, 52);
+		scroll_inven2 = new JScrollBar(Scrollbar.HORIZONTAL, 0, 2, 0, 52);
+		scroll_inven3 = new JScrollBar(Scrollbar.HORIZONTAL, 0, 2, 0, 52);
+		scroll_inven4 = new JScrollBar(Scrollbar.HORIZONTAL, 0, 2, 0, 52);
+		scroll_inven5 = new JScrollBar(Scrollbar.HORIZONTAL, 0, 2, 0, 52);
+		scroll_inven6 = new JScrollBar(Scrollbar.HORIZONTAL, 0, 2, 0, 52);
+		scroll_inven1.setBounds(40,230,100,20);
+		scroll_inven2.setBounds(190,230,100,20);
+		scroll_inven3.setBounds(40,430,100,20);
+		scroll_inven4.setBounds(190,430,100,20);
+		scroll_inven5.setBounds(40,630,100,20);
+		scroll_inven6.setBounds(190,630,100,20);
+		
       /*
        la_sale1=new JLabel("아이템1 판매량: ");      
        la_sale2=new JLabel("아이템2 판매량: ");      

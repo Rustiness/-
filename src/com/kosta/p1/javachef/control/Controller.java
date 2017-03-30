@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -14,7 +16,7 @@ import com.kosta.p1.javachef.model.Model;
 import com.kosta.p1.javachef.view.AdminView;
 import com.kosta.p1.javachef.view.MainView;
 
-public class Controller implements ActionListener {
+public class Controller implements ActionListener,AdjustmentListener {
 	MainView m_View;
 	AdminView ad_View;
 	
@@ -217,6 +219,15 @@ public class Controller implements ActionListener {
 		ad_View.bt_minus4.addActionListener(this);
 		ad_View.bt_minus5.addActionListener(this);
 		ad_View.bt_minus6.addActionListener(this);//메뉴 6 수량 회수버튼
+		
+	    ad_View.scroll_inven1.addAdjustmentListener(this);
+		ad_View.scroll_inven2.addAdjustmentListener(this);
+		ad_View.scroll_inven3.addAdjustmentListener(this);
+		ad_View.scroll_inven4.addAdjustmentListener(this);
+		ad_View.scroll_inven5.addAdjustmentListener(this);
+		ad_View.scroll_inven6.addAdjustmentListener(this);
+		
+		
 
 	
 	}// eventUp
@@ -284,7 +295,28 @@ public class Controller implements ActionListener {
 		
 		}//관리자 button 추가, 삭제
 	}// actionPerformed
-
+	@Override
+	public void adjustmentValueChanged(AdjustmentEvent e) {
+		int one = ad_View.scroll_inven1.getValue();
+		int two = ad_View.scroll_inven2.getValue();
+		int three = ad_View.scroll_inven3.getValue();
+		int four = ad_View.scroll_inven4.getValue();
+		int five = ad_View.scroll_inven5.getValue();
+		int six = ad_View.scroll_inven6.getValue();
+		
+		ad_View.ta_inven1.setText("");
+		ad_View.ta_inven1.append(""+one);
+		ad_View.ta_inven2.setText("");
+		ad_View.ta_inven2.append(""+two);
+		ad_View.ta_inven3.setText("");
+		ad_View.ta_inven3.append(""+three);
+		ad_View.ta_inven4.setText("");
+		ad_View.ta_inven4.append(""+four);
+		ad_View.ta_inven5.setText("");
+		ad_View.ta_inven5.append(""+five);
+		ad_View.ta_inven6.setText("");
+		ad_View.ta_inven6.append(""+six);
+	}
 	public static void main(String[] args) {
 		new Controller();
 	}// main
