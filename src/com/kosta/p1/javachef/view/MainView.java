@@ -83,18 +83,18 @@ public class MainView extends JFrame {
 		bt_menu_arr[4] = bt_menu5;
 		bt_menu_arr[5] = bt_menu6;
 
-		la_menu1 = new JLabel();
-		la_menu1.setBounds(20, 110, 120, 40);
-		la_menu2 = new JLabel();
-		la_menu2.setBounds(170, 110, 120, 40);
-		la_menu3 = new JLabel();
-		la_menu3.setBounds(20, 260, 120, 40);
-		la_menu4 = new JLabel();
-		la_menu4.setBounds(170, 260, 120, 40);
-		la_menu5 = new JLabel();
-		la_menu5.setBounds(20, 410, 120, 40);
-		la_menu6 = new JLabel();
-		la_menu6.setBounds(170, 410, 120, 40);
+		la_menu1 = new JLabel("상품 준비중");
+		la_menu1.setBounds(20, 110, 140, 40);
+		la_menu2 = new JLabel("상품 준비중");
+		la_menu2.setBounds(170, 110, 140, 40);
+		la_menu3 = new JLabel("상품 준비중");
+		la_menu3.setBounds(20, 260, 140, 40);
+		la_menu4 = new JLabel("상품 준비중");
+		la_menu4.setBounds(160, 260, 160, 40);
+		la_menu5 = new JLabel("상품 준비중");
+		la_menu5.setBounds(20, 410, 140, 40);
+		la_menu6 = new JLabel("상품 준비중");
+		la_menu6.setBounds(170, 410, 140, 40);
 		
 		la_menu1.setOpaque(true);
 		la_menu2.setOpaque(true);
@@ -111,7 +111,7 @@ public class MainView extends JFrame {
 		la_menu_arr[5] = la_menu6;
 
 		//메뉴 패널 안에 이미지 넣기
-		ImageIcon p_menu_image = new ImageIcon("data/p_menu_image.jpg");//이미지 아이콘 객체 생성
+		ImageIcon p_menu_image = new ImageIcon("data/p_menu_image.png");//이미지 아이콘 객체 생성
 				
 		p_menu = new JPanel(){
 			public void paintComponent(Graphics g) {
@@ -131,7 +131,7 @@ public class MainView extends JFrame {
 		}
 		
 		//table 생성
-		String columnNames[] = {"메뉴", "수량", "가격"};
+		String columnNames[] = {"메 뉴", "수 량", "가 격"};
 		dtm = new DefaultTableModel(columnNames, 0);
 		tab = new JTable(dtm);
 		scroll = new JScrollPane(tab);
@@ -145,7 +145,7 @@ public class MainView extends JFrame {
 		la_ticket.setOpaque(true);
 		la_ticket.setBackground(Color.GRAY);
 
-		tf_total = new JTextField("총가격 : ");	//총 가격
+		tf_total = new JTextField("총 가격 : 0원");	//총 가격
 		tf_total.setBounds(360, 320, 210, 20);
 		tf_total.setEditable(false);
 		//tf_total.setEnabled(isDisplayable());
@@ -157,8 +157,10 @@ public class MainView extends JFrame {
 		
 		bt_cash = new JButton("현금");
 		bt_cash.setBounds(360, 380, 100, 50);
+		bt_cash.setEnabled(isDisplayable());	//최초 비활성화
 		bt_card = new JButton("카드");
 		bt_card.setBounds(470, 380, 100, 50);
+		bt_card.setEnabled(isDisplayable());	//최초 비활성화
 		bt_return = new JButton("잔금 반환");
 		bt_return.setBounds(360, 440, 100, 50);
 		bt_return.setEnabled(isDisplayable());	//최초 비활성화
@@ -200,31 +202,23 @@ public class MainView extends JFrame {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
-
-	
-	public void clear(){
-		for(int i=0; i<dtm.getRowCount(); i++){
-			dtm.removeRow(i);
-		}
-		
-		i=0;
-	} //clear
 	
 	public void cash(){
 		int i = JOptionPane.showConfirmDialog(this, "투입구에 현금을 넣어주십시오.");
 		if(i==0){
 			JOptionPane.showMessageDialog(this, "결제가 완료됐습니다.");
-			clear();
 		}
 	} //cash
 	
-	public void card(){
-		int i = JOptionPane.showConfirmDialog(this, "투입구에 카드를 넣어주십시오.");
-		if(i==0){
-			JOptionPane.showMessageDialog(this, "결제가 완료됐습니다.");
-			clear();
-		}
-	} //card
+	public void showMsg(String message){
+		JOptionPane.showMessageDialog(this, message);
+		
+	}
+
+	public int showConfMsg(String message){
+		int i = JOptionPane.showConfirmDialog(this, message);
+		return i;
+	}
 	
 //	public static void main(String[] args) {
 //		new MainView();

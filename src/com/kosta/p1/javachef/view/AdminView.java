@@ -59,38 +59,38 @@ public class AdminView extends JFrame {
 		ta_add6.setBounds(190, 500, 100, 100);
 		ta_add6.setBackground(Color.ORANGE );
         
-//				//Addition
-				ta_add_arr[0] = ta_add1;
-				ta_add_arr[1] = ta_add2;
-				ta_add_arr[2] = ta_add3;
-				ta_add_arr[3] = ta_add4;
-				ta_add_arr[4] = ta_add5;
-				ta_add_arr[5] = ta_add6;
+		//Addition
+		ta_add_arr[0] = ta_add1;
+		ta_add_arr[1] = ta_add2;
+		ta_add_arr[2] = ta_add3;
+		ta_add_arr[3] = ta_add4;
+		ta_add_arr[4] = ta_add5;
+		ta_add_arr[5] = ta_add6;
 				
 		
 		bt_add1 = new JButton("추가");
 		bt_add1.setBounds(30, 260, 60, 30);
-		bt_minus1 = new JButton("빼기");
+		bt_minus1 = new JButton("회수");
 		bt_minus1.setBounds(90, 260, 60, 30);
 		bt_add2 = new JButton("추가");
 		bt_add2.setBounds(182, 260, 60, 30);
-		bt_minus2 = new JButton("빼기");
+		bt_minus2 = new JButton("회수");
 		bt_minus2.setBounds(242, 260, 60, 30);
 		bt_add3 = new JButton("추가");
 		bt_add3.setBounds(30, 460, 60, 30);
-		bt_minus3 = new JButton("빼기");
+		bt_minus3 = new JButton("회수");
 		bt_minus3.setBounds(90, 460, 60, 30);
 		bt_add4 = new JButton("추가");
 		bt_add4.setBounds(182, 460, 60, 30);
-		bt_minus4 = new JButton("빼기");
+		bt_minus4 = new JButton("회수");
 		bt_minus4.setBounds(242, 460, 60, 30);
 		bt_add5 = new JButton("추가");
 		bt_add5.setBounds(30, 660, 60, 30);
-		bt_minus5 = new JButton("빼기");
+		bt_minus5 = new JButton("회수");
 		bt_minus5.setBounds(90, 660, 60, 30);
 		bt_add6 = new JButton("추가");
 		bt_add6.setBounds(182, 660, 60, 30);
-		bt_minus6 = new JButton("빼기");
+		bt_minus6 = new JButton("회수");
 		bt_minus6.setBounds(242, 660, 60, 30);
 		
 				
