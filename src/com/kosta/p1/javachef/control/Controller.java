@@ -67,15 +67,16 @@ public class Controller implements ActionListener {
 		this.eventUp();
 	}
 	public void remainderItems(){//재고수량을 관리자 모드에서 표시
-		ad_View.ta_inven1.setText(""+m.itemV.get(0).getItemNum());
-		ad_View.ta_inven2.setText(""+m.itemV.get(1).getItemNum());
-		ad_View.ta_inven3.setText(""+m.itemV.get(2).getItemNum());
-		ad_View.ta_inven4.setText(""+m.itemV.get(3).getItemNum());
-		ad_View.ta_inven5.setText(""+m.itemV.get(4).getItemNum());
-		ad_View.ta_inven6.setText(""+m.itemV.get(5).getItemNum());
+		Vector<Item> itemV = m.selectitemAll();
+		for(int i=0; i<itemV.size(); i++){
+			Item iv = itemV.get(i);
+			ad_View.ta_inven_arr[i].setText(""+iv.getItemNum()); 
+			ad_View.ta_add_arr[i].setText("제품이름"+iv.getItemName()+"\n" +"재고수량"+iv.getItemNum()+"\n" + "판매수량"+iv.getItemAcc()+"\n");
+		}
+		
 	}//remainderItems()
 
-	public void salesStatement(){//1번 부터 6번까지 제품이름, 재고수량, 판매수량
+	public void salesStatement(){//1번 부터 6번까지 제품이름, 재고수량, 판매수량 in 큰 화면
 		Vector<Item> itemV = m.selectitemAll(); 
 		for(int  i= 0 ; i< m.itemV.size(); i++){
 			
@@ -85,7 +86,7 @@ public class Controller implements ActionListener {
 				
 				
 				System.out.println(p.getItemName()+"\t" +p.getItemNum() +"\t" + p.getItemAcc()); //Debugging
-							p.setItemNum(p.getItemNum()+5);
+						
 		}//for TextArea (1-6)
 		
 	}//salesStatement()
@@ -146,6 +147,22 @@ public class Controller implements ActionListener {
 		m_View.bt_final.addActionListener(this); //메인 -> 취소 버튼
 		m_View.bt_cash.addActionListener(this); //메인 -> 현금 버튼
 		m_View.bt_card.addActionListener(this); //메인 -> 현금 버튼
+
+		//addition
+		ad_View.bt_add1.addActionListener(this);//메뉴1 수량 추가버튼
+		ad_View.bt_add2.addActionListener(this);
+		ad_View.bt_add3.addActionListener(this);
+		ad_View.bt_add4.addActionListener(this);
+		ad_View.bt_add5.addActionListener(this);
+		ad_View.bt_add6.addActionListener(this);//메뉴6 수량 추가버튼
+		ad_View.bt_minus1.addActionListener(this);//메뉴1 수량 회수버튼
+		ad_View.bt_minus2.addActionListener(this);
+		ad_View.bt_minus3.addActionListener(this);
+		ad_View.bt_minus4.addActionListener(this);
+		ad_View.bt_minus5.addActionListener(this);
+		ad_View.bt_minus6.addActionListener(this);//메뉴 6 수량 회수버튼
+
+	
 	}// eventUp
 
 	@Override
@@ -158,6 +175,58 @@ public class Controller implements ActionListener {
 		this.clearMenu(ob); //메인뷰의 취소버튼 조작
 		this.payCash(ob); //메인뷰의 현금버튼 조작
 		this.payCard(ob); //메인뷰의 카드버튼 조작
+	
+		Vector<Item> itemV = m.selectitemAll();
+		
+		if(ob == ad_View.bt_add1){//1번 재고수량 추가 버튼
+			
+			m.itemV.get(0).setItemNum(m.itemV.get(0).getItemNum()+ad_View.scroll_inven1.getValue());
+		
+		}else if(ob == ad_View.bt_add2){//2번 재고수량 추가 버튼
+			
+			m.itemV.get(1).setItemNum(m.itemV.get(1).getItemNum()+ad_View.scroll_inven2.getValue());
+		
+		}else if(ob == ad_View.bt_add3){//3번 재고수량 추가 버튼
+			
+			m.itemV.get(2).setItemNum(m.itemV.get(2).getItemNum()+ad_View.scroll_inven3.getValue());
+		
+		}else if(ob == ad_View.bt_add4){//4번 재고수량 추가 버튼
+			
+			m.itemV.get(3).setItemNum(m.itemV.get(3).getItemNum()+ad_View.scroll_inven4.getValue());
+		
+		}else if(ob == ad_View.bt_add5){//5번 재고수량 추가 버튼
+			
+			m.itemV.get(4).setItemNum(m.itemV.get(4).getItemNum()+ad_View.scroll_inven5.getValue());
+		
+		}else if(ob == ad_View.bt_add6){//6번 재고수량 추가 버튼
+			
+			m.itemV.get(5).setItemNum(m.itemV.get(5).getItemNum()+ad_View.scroll_inven6.getValue());
+		
+		}else if(ob == ad_View.bt_minus1){//1번 재고수량 회수 버튼
+			
+			m.itemV.get(0).setItemNum(m.itemV.get(0).getItemNum()-ad_View.scroll_inven1.getValue());
+		
+		}else if(ob == ad_View.bt_minus2){//2번 재고수량 회수 버튼
+			
+			m.itemV.get(1).setItemNum(m.itemV.get(1).getItemNum()-ad_View.scroll_inven2.getValue());
+		
+		}else if(ob == ad_View.bt_minus3){//3번 재고수량 회수 버튼
+			
+			m.itemV.get(2).setItemNum(m.itemV.get(2).getItemNum()-ad_View.scroll_inven3.getValue());
+		
+		}else if(ob == ad_View.bt_minus4){//4번 재고수량 회수 버튼
+			
+			m.itemV.get(3).setItemNum(m.itemV.get(3).getItemNum()-ad_View.scroll_inven4.getValue());
+		
+		}else if(ob == ad_View.bt_minus5){//5번 재고수량 회수 버튼
+			
+			m.itemV.get(4).setItemNum(m.itemV.get(4).getItemNum()-ad_View.scroll_inven5.getValue());
+		
+		}else if(ob == ad_View.bt_minus6){//6번 재고수량 회수 버튼
+			
+			m.itemV.get(5).setItemNum(m.itemV.get(5).getItemNum()-ad_View.scroll_inven6.getValue());
+		
+		}//관리자 button 추가, 삭제
 	}// actionPerformed
 
 	public static void main(String[] args) {
