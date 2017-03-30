@@ -144,16 +144,21 @@ public class MyFile {
 			
 			 fw.close();	
 
-			//total쓰기 시작
-			int total=0;
-			for(int i=0; i<m.itemV.size(); i++){
-				total += m.itemV.get(i).getItemPrice()*m.itemV.get(i).getItemAcc();
-				
-			}
-			String stotal = total+"";
-			
 			FileWriter bw = new FileWriter("data/total.txt");
-			bw.write(stotal);
+			//total쓰기 시작			
+//			int total=0;
+//			for(int i=0; i<m.itemV.size(); i++){
+//				total += m.itemV.get(i).getItemPrice()*m.itemV.get(i).getItemAcc();
+//				
+//			}
+//			String stotal = total+"";
+		
+
+			//total쓰기 시작
+			System.out.println(m.t.getTotal());
+			String total = m.t.getTotal()+"";
+//			bw.write(stotal);
+			bw.write(total);
 			
 			bw.close();
 			

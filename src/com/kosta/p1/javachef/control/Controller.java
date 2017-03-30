@@ -25,6 +25,11 @@ public class Controller implements ActionListener, AdjustmentListener {
 	Vector<Object> tempV;
 	int itemCount[] = new int[6];
 	int sum;
+	
+	Vector<Item> itemV;
+	Vector v;
+	Vector<Vector> accV;
+	Vector<String> accV2;
 
 	public Controller() {
 		m_View = new MainView();
@@ -35,8 +40,14 @@ public class Controller implements ActionListener, AdjustmentListener {
 
 		mf = new MyFile(m);
 		mf.filereader();
-
+		
+		itemV = m.selectitemAll();
+		v = new Vector();
+		accV = new Vector<>();
+		accV2 = new Vector<>();
+		
 		this.viewItemTable(); // 테이블 표시
+		this.itemView(); //상품 라벨 갱신
 		this.eventUp();
 		
 		totalView();
@@ -54,7 +65,7 @@ public class Controller implements ActionListener, AdjustmentListener {
 	}
 
 	public void remainderItems() {// 재고수량을 관리자 모드에서 표시
-		Vector<Item> itemV = m.selectitemAll();
+		System.out.println("itemV" + itemV);
 		for (int i = 0; i < itemV.size(); i++) {
 			Item iv = itemV.get(i);
 	
@@ -64,8 +75,6 @@ public class Controller implements ActionListener, AdjustmentListener {
 	}//remainderItems()
 
 	public void salesStatement(){//1번 부터 6번까지 제품이름, 재고수량, 판매수량 in 큰 화면
-		Vector<Item> itemV = m.selectitemAll(); 
-		 
 		for(int  i= 0 ; i< itemV.size(); i++){
 			
 				Item p = itemV.get(i);
@@ -84,8 +93,6 @@ public class Controller implements ActionListener, AdjustmentListener {
 	
 	
 	public void viewItemTable() { // 상품 테이블 표시 초기화
-		Vector<Item> itemV = m.selectitemAll();
-		Vector v;
 		for (int i = 0; i < 6; i++) {
 			v = new Vector();
 			v.add(itemV.get(i).getItemName());
@@ -99,56 +106,113 @@ public class Controller implements ActionListener, AdjustmentListener {
 
 	
 	public void selectItem(int number) {// 상품 선택
-		Vector<Item> itemV = m.selectitemAll();
-		Vector v;
+		if (itemV.get(number).getItemNum() < 0 || (Integer) m_View.dtm.getValueAt(number, 1) < 0){
+				m_View.showMsg("재고가 없습니다.");
+				return;
+		}
+		
 		itemCount[number]++; // 카운터
-
+		this.itemView(); //상품 라벨 갱신
 		v = new Vector();
 		v.add(itemV.get(number).getItemName());
 		v.add(itemCount[number]);
 		v.add(itemV.get(number).getItemPrice() * itemCount[number]);
+		v.add(String.format("%,d", itemV.get(number).getItemPrice() * itemCount[number]));
 
-		System.out.println("벡터 저장 전: " + tempV.toString());
+		System.out.println("벡터 저장 전 : " + tempV.get(number).toString());
 		tempV.set(number, v);
-		System.out.println("벡터 저장 후: " + tempV.toString());
-		m_View.dtm.setValueAt(itemCount[number], number, 1);
-		m_View.dtm.setValueAt(itemV.get(number).getItemPrice() * itemCount[number], number, 2);
+		System.out.println("벡터 저장 후 : " + tempV.get(number).toString());
+		m_View.dtm.setValueAt(v.get(1), number, 1);
+		m_View.dtm.setValueAt(String.format("%,d", v.get(2)), number, 2);
+
+		for (int i = 0; i < m_View.dtm.getRowCount(); i++) {
+			m_View.bt_cash.setEnabled(true);	//결제 버튼 표시
+			m_View.bt_card.setEnabled(true);
+			int ii = (Integer) m_View.dtm.getValueAt(i, 1);
+			if (ii != 0) {
+				accV2.add(String.valueOf(m_View.dtm.getValueAt(i, 0)));
+				accV2.add(String.valueOf(m_View.dtm.getValueAt(i, 1)));
+				accV.add(accV2);
+			}
+		}
+		
+		int a = Integer.valueOf(String.valueOf(m_View.dtm.getValueAt(0, 2)).replaceAll(",", ""));
+		int b = Integer.valueOf(String.valueOf(m_View.dtm.getValueAt(1, 2)).replaceAll(",", ""));
+		int c = Integer.valueOf(String.valueOf(m_View.dtm.getValueAt(2, 2)).replaceAll(",", ""));
+		int d = Integer.valueOf(String.valueOf(m_View.dtm.getValueAt(3, 2)).replaceAll(",", ""));
+		int e = Integer.valueOf(String.valueOf(m_View.dtm.getValueAt(4, 2)).replaceAll(",", ""));
+		int f = Integer.valueOf(String.valueOf(m_View.dtm.getValueAt(5, 2)).replaceAll(",", ""));
+
+		int total = a + b + c + d + e + f;
+
+		selectTotal(total);
 	} // selectItem
+	
+	
+	public void selectTotal(int total) { //선택 총 가격 
+		m_View.tf_total.setText("총 가격 : " + String.format("%,d", total) + "원");
+	}//selectTotal
 
 	public void selectReset() { // 상품 선택 전체 초기화
-		Vector<Item> itemV = m.selectitemAll();
-		Vector v;
+		this.itemView(); // 상품 라벨 갱신
+		m_View.bt_cash.setEnabled(false); // 결제 버튼 숨김
+		m_View.bt_card.setEnabled(false);
 		for (int i = 0; i < tempV.size(); i++) {
 			itemCount[i] = 0;
 			v = new Vector();
 			v.add(itemV.get(i).getItemName());
-			v.add(itemCount[i]);
-			v.add(itemV.get(i).getItemPrice() * itemCount[0]);
+			v.add(0);
+			v.add(0);
 			tempV.set(0, v);
-			System.out.println("벡터 초기화 후: " + tempV.toString());
+			System.out.println("벡터 초기화 후: " + tempV.get(0).toString());
 			m_View.dtm.removeRow(0);
 			m_View.dtm.addRow((Vector) tempV.get(0));
+			selectTotal(0);
 		}
 	} // selectReset
 
 	public void itemView() { // 자판기 상품명 가격 표시 메소드
-		Vector<Item> v = m.selectitemAll();
-		for (int i = 0; i < v.size(); i++) {
-			Item item = v.get(i);
-			m_View.la_menu_arr[i].setText(item.getItemName() + "   " + item.getItemPrice());
+		for (int i = 0; i < itemV.size(); i++) {
+			Item item = itemV.get(i);
+			m_View.la_menu_arr[i].setText(item.getItemName() + " | " + String.format("%,d", item.getItemPrice()) + "원 | " + item.getItemNum() +"매");
 		}
 	}// itemView
 
 	public void totalView(){  //총매출 표시 메소드 in 관리자
-		
-		
-		String str = "총 매출액: "+m.t.getTotal()+"원";
-		ad_View.tf_total.setText(str);
+		   int salesMoney=0;
+		for(int i =0; i<itemV.size(); i++){
+			Item iv = itemV.get(i);
+			salesMoney = iv.getItemAcc()* iv.getItemPrice();
+			sum += salesMoney;
+			}//for
+		ad_View.tf_total.setText("" +sum);
 	}//totalView
-
-
-
-
+	
+	public void card(){ //카드 결제
+		int i = m_View.showConfMsg(m_View.tf_total.getText() + " 입니다.\n 카드결제를 진행하시겠습니까?");
+		if(i == 0){
+			String str = m_View.tf_total.getText().replaceAll(",", "");
+			String str2 = str.substring(7, str.length()-1);
+			int total = Integer.parseInt(str2);
+			m.t.setTotal(total);
+			this.sendAcc();
+			this.selectReset(); // 상품 선택 전체 초기화
+			m_View.showMsg("결제가 완료되었습니다.");
+		}
+		
+		System.out.println(m.t.getTotal());
+	} //card
+	
+	public void sendAcc(){ //상품 판매 정보 전송 
+		for(int i=0; i<accV.size(); i++){
+			System.out.println("상품명 : "+String.valueOf(accV.get(i).get(0)));
+			System.out.println("수량 : "+String.valueOf(accV.get(i).get(1)));
+			String itemName = String.valueOf(accV.get(i).get(0));
+			int itemStock = Integer.parseInt(String.valueOf(accV.get(i).get(1)));
+			
+			m.updateItem(itemName, itemStock);
+		}
+	}//sendAcc
 	
 	public void changeView(Object ob) {
 		if (ob == m_View.bt_adminView) {
@@ -161,6 +225,7 @@ public class Controller implements ActionListener, AdjustmentListener {
 			ad_View.setVisible(false); // 관리자 숨김
 			m_View.setLocation(600, 50);
 			m_View.setVisible(true); // 메인 표시
+			this.itemView(); // 상품 라벨 갱신
 		}
 	} // changeView
 	
@@ -194,7 +259,7 @@ public class Controller implements ActionListener, AdjustmentListener {
 	
 	private void payCard(Object ob){
 		if (ob == m_View.bt_card) {
-			m_View.card();
+			this.card();
 		}
 	} // payCard
 	
@@ -249,56 +314,55 @@ public class Controller implements ActionListener, AdjustmentListener {
 		this.payCash(ob); //메인뷰의 현금버튼 조작
 		this.payCard(ob); //메인뷰의 카드버튼 조작
 	
-		Vector<Item> itemV = m.selectitemAll();
-		
-		if(ob == ad_View.bt_add1){//1번 재고수량 추가 버튼
-			
-			itemV.get(0).setItemNum(itemV.get(0).getItemNum()+ad_View.scroll_inven1.getValue());
+
+		if (ob == ad_View.bt_add1) {// 1번 재고수량 추가 버튼
+			m.itemV.get(0).setItemNum(m.itemV.get(0).getItemNum() + ad_View.scroll_inven1.getValue());
 			remainderItems();
-		}else if(ob == ad_View.bt_add2){//2번 재고수량 추가 버튼
 			
-			itemV.get(1).setItemNum(itemV.get(1).getItemNum()+ad_View.scroll_inven2.getValue());
+		} else if (ob == ad_View.bt_add2) {// 2번 재고수량 추가 버튼
+			m.itemV.get(1).setItemNum(m.itemV.get(1).getItemNum() + ad_View.scroll_inven2.getValue());
 			remainderItems();
-		}else if(ob == ad_View.bt_add3){//3번 재고수량 추가 버튼
 			
-			itemV.get(2).setItemNum(itemV.get(2).getItemNum()+ad_View.scroll_inven3.getValue());
+		} else if (ob == ad_View.bt_add3) {// 3번 재고수량 추가 버튼
+			m.itemV.get(2).setItemNum(m.itemV.get(2).getItemNum() + ad_View.scroll_inven3.getValue());
 			remainderItems();
-		}else if(ob == ad_View.bt_add4){//4번 재고수량 추가 버튼
 			
-			itemV.get(3).setItemNum(itemV.get(3).getItemNum()+ad_View.scroll_inven4.getValue());
+		} else if (ob == ad_View.bt_add4) {// 4번 재고수량 추가 버튼
+			m.itemV.get(3).setItemNum(m.itemV.get(3).getItemNum() + ad_View.scroll_inven4.getValue());
 			remainderItems();
-		}else if(ob == ad_View.bt_add5){//5번 재고수량 추가 버튼
 			
-			itemV.get(4).setItemNum(itemV.get(4).getItemNum()+ad_View.scroll_inven5.getValue());
+		} else if (ob == ad_View.bt_add5) {// 5번 재고수량 추가 버튼
+			m.itemV.get(4).setItemNum(m.itemV.get(4).getItemNum() + ad_View.scroll_inven5.getValue());
 			remainderItems();
-		}else if(ob == ad_View.bt_add6){//6번 재고수량 추가 버튼
 			
-			itemV.get(5).setItemNum(itemV.get(5).getItemNum()+ad_View.scroll_inven6.getValue());
+		} else if (ob == ad_View.bt_add6) {// 6번 재고수량 추가 버튼
+			m.itemV.get(5).setItemNum(m.itemV.get(5).getItemNum() + ad_View.scroll_inven6.getValue());
 			remainderItems();
-		}else if(ob == ad_View.bt_minus1){//1번 재고수량 회수 버튼
 			
-			itemV.get(0).setItemNum(itemV.get(0).getItemNum()-ad_View.scroll_inven1.getValue());
+		} else if (ob == ad_View.bt_minus1) {// 1번 재고수량 회수 버튼
+			m.itemV.get(0).setItemNum(m.itemV.get(0).getItemNum() - ad_View.scroll_inven1.getValue());
 			remainderItems();
-		}else if(ob == ad_View.bt_minus2){//2번 재고수량 회수 버튼
 			
-			itemV.get(1).setItemNum(itemV.get(1).getItemNum()-ad_View.scroll_inven2.getValue());
+		} else if (ob == ad_View.bt_minus2) {// 2번 재고수량 회수 버튼
+			m.itemV.get(1).setItemNum(m.itemV.get(1).getItemNum() - ad_View.scroll_inven2.getValue());
 			remainderItems();
-		}else if(ob == ad_View.bt_minus3){//3번 재고수량 회수 버튼
 			
-			itemV.get(2).setItemNum(itemV.get(2).getItemNum()-ad_View.scroll_inven3.getValue());
+		} else if (ob == ad_View.bt_minus3) {// 3번 재고수량 회수 버튼
+			m.itemV.get(2).setItemNum(m.itemV.get(2).getItemNum() - ad_View.scroll_inven3.getValue());
 			remainderItems();
-		}else if(ob == ad_View.bt_minus4){//4번 재고수량 회수 버튼
 			
-			itemV.get(3).setItemNum(itemV.get(3).getItemNum()-ad_View.scroll_inven4.getValue());
+		} else if (ob == ad_View.bt_minus4) {// 4번 재고수량 회수 버튼
+			m.itemV.get(3).setItemNum(m.itemV.get(3).getItemNum() - ad_View.scroll_inven4.getValue());
 			remainderItems();
-		}else if(ob == ad_View.bt_minus5){//5번 재고수량 회수 버튼
 			
-			itemV.get(4).setItemNum(itemV.get(4).getItemNum()-ad_View.scroll_inven5.getValue());
+		} else if (ob == ad_View.bt_minus5) {// 5번 재고수량 회수 버튼
+			m.itemV.get(4).setItemNum(m.itemV.get(4).getItemNum() - ad_View.scroll_inven5.getValue());
 			remainderItems();
-		}else if(ob == ad_View.bt_minus6){//6번 재고수량 회수 버튼
 			
-			itemV.get(5).setItemNum(itemV.get(5).getItemNum()-ad_View.scroll_inven6.getValue());
+		} else if (ob == ad_View.bt_minus6) {// 6번 재고수량 회수 버튼
+			m.itemV.get(5).setItemNum(m.itemV.get(5).getItemNum() - ad_View.scroll_inven6.getValue());
 			remainderItems();
+
 		}//관리자 button 추가, 삭제
 	}// actionPerformed
 	@Override
