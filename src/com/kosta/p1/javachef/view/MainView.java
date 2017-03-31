@@ -40,10 +40,12 @@ public class MainView extends JFrame {
 
 	public MainView() {
 		
-		Font f1 = new Font("궁서체",Font.PLAIN,40);
+		Font f1 = new Font("궁서체",Font.PLAIN,35);
+		
 		la_title = new JLabel("JAVA쉐프 - 자판기");
 		la_title.setFont(f1);
-		la_title.setBounds(50, 30, 200, 100);
+		la_title.setForeground(Color.WHITE);
+		la_title.setBounds(55, 45, 400, 100);
 		la_title.setBackground(Color.blue);
 
 
@@ -127,8 +129,8 @@ public class MainView extends JFrame {
 			p_menu.add(la_menu_arr[i]);
 		}
 		
-		la_ticket = new JLabel("식권 배출구");
-		la_ticket.setBounds(370, 570, 320, 50);
+		la_ticket = new JLabel("                       식권 배출구");
+		la_ticket.setBounds(710, 510, 210, 50);
 		la_ticket.setOpaque(true);
 		la_ticket.setBackground(Color.GRAY);
 		

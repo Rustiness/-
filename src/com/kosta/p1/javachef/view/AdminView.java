@@ -39,36 +39,38 @@ public class AdminView extends JFrame {
 	
 	public AdminView() {
 
-		Font f1 = new Font("궁서체",Font.PLAIN,40);
+		Font f1 = new Font("궁서체",Font.PLAIN,35);
+		
 		la_top = new JLabel("JAVA쉐프 - 관리자");
+		la_top.setForeground(Color.WHITE);
 		la_top.setFont(f1);
-		la_top.setBounds(50, 30, 200, 100);
+		la_top.setBounds(55, 45, 400, 100);
 		bt_mainView = new JButton("메인");
 		bt_mainView.setBounds(840, 60, 80, 30);
 
 		bt1 = new ImageIcon("don.png");// 사진크기는 1.8cm(정사각형)
 		ta_add1 = new JTextArea();
-		ta_add1.setBounds(30, 50, 100, 75);/////
+		ta_add1.setBounds(30, 65, 100, 75);/////
 		ta_add1.setBackground(Color.ORANGE );
 		ta_add1.setEditable(false);
 		ta_add2 = new JTextArea();
-		ta_add2.setBounds(190, 50, 100, 75);/////
+		ta_add2.setBounds(190, 65, 100, 75);/////
 		ta_add2.setBackground(Color.ORANGE );
 		ta_add2.setEditable(false);
 		ta_add3 = new JTextArea();
-		ta_add3.setBounds(30, 200, 100, 75);/////
+		ta_add3.setBounds(30, 215, 100, 75);/////
 		ta_add3.setBackground(Color.ORANGE );
 		ta_add3.setEditable(false);
 		ta_add4 = new JTextArea();
-		ta_add4.setBounds(190, 200, 100, 75);////
+		ta_add4.setBounds(190, 215, 100, 75);////
 		ta_add4.setBackground(Color.ORANGE );
 		ta_add4.setEditable(false);
 		ta_add5 = new JTextArea();
-		ta_add5.setBounds(30, 350, 100, 75);////
+		ta_add5.setBounds(30, 365, 100, 75);////
 		ta_add5.setBackground(Color.ORANGE );
 		ta_add5.setEditable(false);
 		ta_add6 = new JTextArea();
-		ta_add6.setBounds(190, 350, 100, 75);////
+		ta_add6.setBounds(190, 365, 100, 75);////
 		ta_add6.setBackground(Color.ORANGE );
 		ta_add6.setEditable(false);
         
@@ -81,22 +83,22 @@ public class AdminView extends JFrame {
 		ta_add_arr[5] = ta_add6;
 				
 		tf_inven1 = new JTextField("0");
-		tf_inven1.setBounds(30, 130, 30, 20);/////
+		tf_inven1.setBounds(30, 145, 30, 20);/////
 		tf_inven1.setEditable(false);
 		tf_inven2 = new JTextField("0");
-		tf_inven2.setBounds(190, 130, 30, 20);/////
+		tf_inven2.setBounds(190, 145, 30, 20);/////
 		tf_inven2.setEditable(false);
 		tf_inven3 = new JTextField("0");
-		tf_inven3.setBounds(30, 280, 30, 20);/////
+		tf_inven3.setBounds(30, 295, 30, 20);/////
 		tf_inven3.setEditable(false);
 		tf_inven4 = new JTextField("0");
-		tf_inven4.setBounds(190, 280, 30, 20);////
+		tf_inven4.setBounds(190, 295, 30, 20);////
 		tf_inven4.setEditable(false);
 		tf_inven5 = new JTextField("0");
-		tf_inven5.setBounds(30, 430, 30, 20);////
+		tf_inven5.setBounds(30, 445, 30, 20);////
 		tf_inven5.setEditable(false);
 		tf_inven6 = new JTextField("0");
-		tf_inven6.setBounds(190, 430, 30, 20);////
+		tf_inven6.setBounds(190, 445, 30, 20);////
 		tf_inven6.setEditable(false);
 		
 		//Addition
@@ -113,12 +115,12 @@ public class AdminView extends JFrame {
 		scroll_inven4 = new JScrollBar(Scrollbar.HORIZONTAL, 0, 2, 0, 52);
 		scroll_inven5 = new JScrollBar(Scrollbar.HORIZONTAL, 0, 2, 0, 52);
 		scroll_inven6 = new JScrollBar(Scrollbar.HORIZONTAL, 0, 2, 0, 52);
-		scroll_inven1.setBounds(60,130,90,20);//
-		scroll_inven2.setBounds(220,130,90,20);//
-		scroll_inven3.setBounds(60,280,90,20);//
-		scroll_inven4.setBounds(220,280,90,20);//
-		scroll_inven5.setBounds(60,430,90,20);
-		scroll_inven6.setBounds(220,430,90,20);
+		scroll_inven1.setBounds(60,145,90,20);//
+		scroll_inven2.setBounds(220,145,90,20);//
+		scroll_inven3.setBounds(60,295,90,20);//
+		scroll_inven4.setBounds(220,295,90,20);//
+		scroll_inven5.setBounds(60,445,90,20);
+		scroll_inven6.setBounds(220,445,90,20);
 		
 		//Addition
 		scroll_inven_arr[0] = scroll_inven1; //회수 버튼 배열로 저장
@@ -129,29 +131,29 @@ public class AdminView extends JFrame {
 		scroll_inven_arr[5] = scroll_inven6;
 		
 		bt_add1 = new JButton("추가");
-		bt_add1.setBounds(30, 150, 60, 30);//
+		bt_add1.setBounds(30, 165, 60, 30);//
 		bt_minus1 = new JButton("회수");
-		bt_minus1.setBounds(90, 150, 60, 30);//
+		bt_minus1.setBounds(90, 165, 60, 30);//
 		bt_add2 = new JButton("추가");
-		bt_add2.setBounds(190, 150, 60, 30);//
+		bt_add2.setBounds(190, 165, 60, 30);//
 		bt_minus2 = new JButton("회수");
-		bt_minus2.setBounds(250, 150, 60, 30);//
+		bt_minus2.setBounds(250, 165, 60, 30);//
 		bt_add3 = new JButton("추가");
-		bt_add3.setBounds(30, 300, 60, 30);//
+		bt_add3.setBounds(30, 315, 60, 30);//
 		bt_minus3 = new JButton("회수");
-		bt_minus3.setBounds(90, 300, 60, 30);//
+		bt_minus3.setBounds(90, 315, 60, 30);//
 		bt_add4 = new JButton("추가");
-		bt_add4.setBounds(190, 300, 60, 30);///
+		bt_add4.setBounds(190, 315, 60, 30);///
 		bt_minus4 = new JButton("회수");
-		bt_minus4.setBounds(250, 300, 60, 30);//
+		bt_minus4.setBounds(250, 315, 60, 30);//
 		bt_add5 = new JButton("추가");
-		bt_add5.setBounds(30, 450, 60, 30);
+		bt_add5.setBounds(30, 465, 60, 30);
 		bt_minus5 = new JButton("회수");
-		bt_minus5.setBounds(90, 450, 60, 30);
+		bt_minus5.setBounds(90, 465, 60, 30);
 		bt_add6 = new JButton("추가");
-		bt_add6.setBounds(190, 450, 60, 30);
+		bt_add6.setBounds(190, 465, 60, 30);
 		bt_minus6 = new JButton("회수");
-		bt_minus6.setBounds(250, 450, 60, 30);
+		bt_minus6.setBounds(250, 465, 60, 30);
 		
 		//Addition
 		bt_add_arr[0] = bt_add1;	//추가 버튼 배열로 저장
@@ -212,13 +214,13 @@ public class AdminView extends JFrame {
 
 		ta_item = new JTextArea();
 		ta_item.setEditable(false);
-		ta_item.setBounds(10, 10, 210, 415);
+		ta_item.setBounds(10, 5, 210, 415);
 
-		bt_return = new JButton("정산");
-		bt_return.setBounds(10, 500, 210, 30);
+		//bt_return = new JButton("정산");
+		//bt_return.setBounds(10, 500, 210, 30);
 
 		tf_total = new JTextField();		//총
-		tf_total.setBounds(10, 440, 60, 30);
+		tf_total.setBounds(10, 430, 210, 30);
 
 
 		p_handle2 = new JPanel();
@@ -258,7 +260,6 @@ public class AdminView extends JFrame {
 		JOptionPane.showMessageDialog(this, message);
 		
 	}
-   
 //   public static void main(String[] args) {
 //      new AdminView();
 //   }//main
