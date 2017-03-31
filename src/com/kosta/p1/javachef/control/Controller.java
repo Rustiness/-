@@ -187,7 +187,31 @@ public class Controller implements ActionListener, AdjustmentListener {
 
 
 
-
+	public void card(){ //카드 결제
+		int i = m_View.showConfMsg(m_View.tf_total.getText() + " 입니다.\n 카드결제를 진행하시겠습니까?");
+		if(i == 0){
+			String str = m_View.tf_total.getText().replaceAll(",", "");
+			String str2 = str.substring(7, str.length()-1);
+			int total = Integer.parseInt(str2);
+			m.t.setTotal(total);
+			this.sendAcc();
+			this.selectReset(); // 상품 선택 전체 초기화
+			m_View.showMsg("결제가 완료되었습니다.");
+		}
+  		
+		System.out.println(m.t.getTotal());
+	} //card
+	
+	public void sendAcc(){ //상품 판매 정보 전송 
+		for(int i=0; i<accV.size(); i++){
+			System.out.println("상품명 : "+String.valueOf(accV.get(i).get(0)));
+			System.out.println("수량 : "+String.valueOf(accV.get(i).get(1)));
+			String itemName = String.valueOf(accV.get(i).get(0));
+			int itemStock = Integer.parseInt(String.valueOf(accV.get(i).get(1)));
+			
+			m.updateItem(itemName, itemStock);
+		}
+	}//sendAcc
 	
 	public void changeView(Object ob) {
 		if (ob == m_View.bt_adminView) {
