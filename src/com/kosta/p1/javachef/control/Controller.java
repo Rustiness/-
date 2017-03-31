@@ -124,17 +124,6 @@ public class Controller implements ActionListener, AdjustmentListener {
 		System.out.println("벡터 저장 후 : " + tempV.get(number).toString());
 		m_View.dtm.setValueAt(v.get(1), number, 1);
 		m_View.dtm.setValueAt(String.format("%,d", v.get(2)), number, 2);
-
-		for (int i = 0; i < m_View.dtm.getRowCount(); i++) {
-			m_View.bt_cash.setEnabled(true);	//결제 버튼 표시
-			m_View.bt_card.setEnabled(true);
-			int ii = (Integer) m_View.dtm.getValueAt(i, 1);
-			if (ii != 0) {
-				accV2.add(String.valueOf(m_View.dtm.getValueAt(i, 0)));
-				accV2.add(String.valueOf(m_View.dtm.getValueAt(i, 1)));
-				accV.add(accV2);
-			}
-		}
 		
 		int a = Integer.valueOf(String.valueOf(m_View.dtm.getValueAt(0, 2)).replaceAll(",", ""));
 		int b = Integer.valueOf(String.valueOf(m_View.dtm.getValueAt(1, 2)).replaceAll(",", ""));
@@ -146,6 +135,9 @@ public class Controller implements ActionListener, AdjustmentListener {
 		int total = a + b + c + d + e + f;
 
 		selectTotal(total);
+		
+		m_View.bt_cash.setEnabled(true);	//결제 버튼 표시
+		m_View.bt_card.setEnabled(true);
 	} // selectItem
 	
 	
@@ -194,6 +186,7 @@ public class Controller implements ActionListener, AdjustmentListener {
 			String str2 = str.substring(7, str.length()-1);
 			int total = Integer.parseInt(str2);
 			m.t.setTotal(total);
+			acc();
 			this.sendAcc();
 			this.selectReset(); // 상품 선택 전체 초기화
 			m_View.showMsg("결제가 완료되었습니다.");
@@ -201,6 +194,17 @@ public class Controller implements ActionListener, AdjustmentListener {
   		
 		System.out.println(m.t.getTotal());
 	} //card
+	
+	public void acc(){
+		for (int i = 0; i < m_View.dtm.getRowCount(); i++) {
+			int ii = (Integer) m_View.dtm.getValueAt(i, 1);
+			if (ii != 0) {
+				accV2.add(String.valueOf(m_View.dtm.getValueAt(i, 0)));
+				accV2.add(String.valueOf(m_View.dtm.getValueAt(i, 1)));
+				accV.add(accV2);
+			}
+		}
+	}
 	
 	public void sendAcc(){ //상품 판매 정보 전송 
 		for(int i=0; i<accV.size(); i++){
