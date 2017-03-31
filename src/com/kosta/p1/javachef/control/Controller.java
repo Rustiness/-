@@ -368,16 +368,15 @@ public class Controller implements ActionListener, AdjustmentListener {
 	
 
 		if (ob == ad_View.bt_add1) {// 1번 재고수량 추가 버튼
-						
+			
 			if(m.itemV.get(0).getItemNum()+ ad_View.scroll_inven1.getValue() > 200) {
 				ad_View.showMsg("재고 최대수량은200개 입니다\n"
 						+(200-m.itemV.get(0).getItemNum()+"개만 추가하세요"));
 			}else {
 				m.itemV.get(0).setItemNum(m.itemV.get(0).getItemNum() + ad_View.scroll_inven1.getValue());
-				
+				ad_View.scroll_inven1.setValue(0);	
 			}
 			remainderItems();
-			
 		} else if (ob == ad_View.bt_add2) {// 2번 재고수량 추가 버튼
 			
 			if(m.itemV.get(1).getItemNum()+ ad_View.scroll_inven2.getValue() > 200) {
@@ -385,19 +384,19 @@ public class Controller implements ActionListener, AdjustmentListener {
 						+(200-m.itemV.get(1).getItemNum()+"개만 추가하세요"));
 			}else {
 				m.itemV.get(1).setItemNum(m.itemV.get(1).getItemNum() + ad_View.scroll_inven2.getValue());
-				
+				ad_View.scroll_inven2.setValue(0);	
 			}
 			remainderItems();
-			
 		} else if (ob == ad_View.bt_add3) {// 3번 재고수량 추가 버튼
 			if(m.itemV.get(2).getItemNum()+ ad_View.scroll_inven3.getValue() > 200) {
 				ad_View.showMsg("재고 최대수량은200개 입니다\n"
 						+(200-m.itemV.get(2).getItemNum()+"개만 추가하세요"));
 			}else {
 				m.itemV.get(2).setItemNum(m.itemV.get(2).getItemNum() + ad_View.scroll_inven3.getValue());
-				
+				ad_View.scroll_inven3.setValue(0);	
 			}
 			remainderItems();
+			
 			
 		} else if (ob == ad_View.bt_add4) {// 4번 재고수량 추가 버튼
 			if(m.itemV.get(3).getItemNum()+ ad_View.scroll_inven4.getValue() > 200) {
@@ -405,7 +404,7 @@ public class Controller implements ActionListener, AdjustmentListener {
 						+(200-m.itemV.get(3).getItemNum()+"개만 추가하세요"));
 			}else {
 				m.itemV.get(3).setItemNum(m.itemV.get(3).getItemNum() + ad_View.scroll_inven4.getValue());
-				
+				ad_View.scroll_inven4.setValue(0);	
 			}
 			remainderItems();
 			
@@ -415,7 +414,7 @@ public class Controller implements ActionListener, AdjustmentListener {
 						+(200-m.itemV.get(4).getItemNum()+"개만 추가하세요"));
 			}else {
 				m.itemV.get(4).setItemNum(m.itemV.get(4).getItemNum() + ad_View.scroll_inven5.getValue());
-				
+				ad_View.scroll_inven5.setValue(0);	
 			}
 			remainderItems();
 			
@@ -425,7 +424,7 @@ public class Controller implements ActionListener, AdjustmentListener {
 						+(200-m.itemV.get(5).getItemNum()+"개만 추가하세요"));
 			}else {
 				m.itemV.get(5).setItemNum(m.itemV.get(5).getItemNum() + ad_View.scroll_inven6.getValue());
-				
+				ad_View.scroll_inven6.setValue(0);	
 			}
 			remainderItems();
 			
@@ -435,7 +434,7 @@ public class Controller implements ActionListener, AdjustmentListener {
 						+(m.itemV.get(0).getItemNum()+"개까지 회수 가능합니다"));
 			}else {
 				m.itemV.get(0).setItemNum(m.itemV.get(0).getItemNum() - ad_View.scroll_inven1.getValue());
-				
+				ad_View.scroll_inven1.setValue(0);	
 			}
 			remainderItems();
 			
@@ -446,7 +445,7 @@ public class Controller implements ActionListener, AdjustmentListener {
 						+(m.itemV.get(1).getItemNum()+"개까지 회수 가능합니다"));
 			}else {
 				m.itemV.get(1).setItemNum(m.itemV.get(1).getItemNum() - ad_View.scroll_inven2.getValue());
-				
+				ad_View.scroll_inven2.setValue(0);	
 			}
 			remainderItems();
 			
@@ -457,7 +456,7 @@ public class Controller implements ActionListener, AdjustmentListener {
 						+(m.itemV.get(2).getItemNum()+"개까지 회수 가능합니다"));
 			}else {
 				m.itemV.get(2).setItemNum(m.itemV.get(2).getItemNum() - ad_View.scroll_inven3.getValue());
-				
+				ad_View.scroll_inven3.setValue(0);	
 			}
 			remainderItems();
 			
@@ -468,7 +467,7 @@ public class Controller implements ActionListener, AdjustmentListener {
 						+(m.itemV.get(3).getItemNum()+"개까지 회수 가능합니다"));
 			}else {
 				m.itemV.get(3).setItemNum(m.itemV.get(3).getItemNum() - ad_View.scroll_inven4.getValue());
-				
+				ad_View.scroll_inven4.setValue(0);	
 			}
 			remainderItems();
 			
@@ -479,7 +478,7 @@ public class Controller implements ActionListener, AdjustmentListener {
 						+(m.itemV.get(4).getItemNum()+"개까지 회수 가능합니다"));
 			}else {
 				m.itemV.get(4).setItemNum(m.itemV.get(4).getItemNum() - ad_View.scroll_inven5.getValue());
-				
+				ad_View.scroll_inven5.setValue(0);	
 			}
 			remainderItems();
 			
@@ -489,7 +488,7 @@ public class Controller implements ActionListener, AdjustmentListener {
 						+(m.itemV.get(5).getItemNum()+"개까지 회수 가능합니다"));
 			}else {
 				m.itemV.get(5).setItemNum(m.itemV.get(5).getItemNum() - ad_View.scroll_inven6.getValue());
-				
+				ad_View.scroll_inven6.setValue(0);	
 			}
 			remainderItems();
 
