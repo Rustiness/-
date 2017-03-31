@@ -15,6 +15,7 @@ import javax.swing.JScrollBar;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
+import javax.swing.JOptionPane;
 
 public class AdminView extends JFrame {
 
@@ -253,6 +254,10 @@ public class AdminView extends JFrame {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
    }//»ý¼ºÀÚ
+	public void showMsg(String message){
+		JOptionPane.showMessageDialog(this, message);
+		
+	}
    
 //   public static void main(String[] args) {
 //      new AdminView();
