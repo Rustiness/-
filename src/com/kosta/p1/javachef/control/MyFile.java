@@ -155,7 +155,7 @@ public class MyFile {
 		
 
 			//total쓰기 시작
-			System.out.println(m.t.getTotal());
+			//System.out.println(m.t.getTotal());
 			String total = m.t.getTotal()+"";
 //			bw.write(stotal);
 			bw.write(total);

@@ -16,7 +16,7 @@ public class Model{
 	
 	public void inserttotal(int total){
 		t = new Total(total);
-		System.out.println(t.getTotal());
+		//System.out.println(t.getTotal());
 	}
 
 	public void insertitem(Item item) {
@@ -28,7 +28,7 @@ public class Model{
 	}	
 	
 	public void updateItem(String itemName, int itemAcc){
-		System.out.println(itemName + itemAcc);
+		//System.out.println(itemName + itemAcc);
 		for(int i=0;i<itemV.size();i++){
 			
 			it=itemV.get(i);
@@ -37,8 +37,8 @@ public class Model{
 				  it.setItemNum(it.getItemNum()-itemAcc);
 				  it.setItemAcc(it.getItemAcc()+itemAcc);  
 				  
-				  System.out.println(it.getItemNum());
-				  System.out.println(it.getItemAcc());
+				  //System.out.println(it.getItemNum());
+				  //System.out.println(it.getItemAcc());
 				  
 				  return;
 				  

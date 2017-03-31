@@ -25,7 +25,7 @@ public class MainView extends JFrame {
 	JTable tab;
 	int i;
 	
-	JLabel la_change, la_title, la_ticket;
+	public JLabel la_change, la_title, la_ticket;
 	public JLabel la_menu1, la_menu2, la_menu3, la_menu4, la_menu5, la_menu6;
 	public JLabel la_menu_arr[] = new JLabel[6];
 	public JTextField tf_total, tf_payPrice, tf_balance;
@@ -143,6 +143,7 @@ public class MainView extends JFrame {
 		
 		bt_final = new JButton("선택 초기화");
 		bt_final.setBounds(150, 160, 110, 30);
+		bt_final.setEnabled(isDisplayable());	//최초 비활성화
 
 		tf_total = new JTextField("총 가격 : 0원");	//총 가격
 		tf_total.setBounds(60, 220, 210, 20);
