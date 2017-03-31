@@ -2,10 +2,10 @@ package com.kosta.p1.javachef.control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -257,14 +257,14 @@ public class Controller implements ActionListener, AdjustmentListener {
 	public void changeView(Object ob) {
 		if (ob == m_View.bt_adminView) {
 			m_View.setVisible(false); // 메인 숨김
-			ad_View.setLocation(600, 50);
+			ad_View.setLocation(180, 20);
 			ad_View.setVisible(true); // 관리자 표시
 			this.remainderItems(); // 관리자모드가 바뀌자마자 재고수량 표시
 			this.salesStatement();// 매출표_제품이름_재고수량_판매수량
 			this.totalView();
 		} else if (ob == ad_View.bt_mainView) {
 			ad_View.setVisible(false); // 관리자 숨김
-			m_View.setLocation(600, 50);
+			m_View.setLocation(180, 20);
 			m_View.setVisible(true); // 메인 표시
 			this.itemView(); // 상품 라벨 갱신
 		}
@@ -415,18 +415,18 @@ public class Controller implements ActionListener, AdjustmentListener {
 		int five = ad_View.scroll_inven5.getValue();
 		int six = ad_View.scroll_inven6.getValue();
 		
-		ad_View.ta_inven1.setText("");
-		ad_View.ta_inven1.append(""+one);
-		ad_View.ta_inven2.setText("");
-		ad_View.ta_inven2.append(""+two);
-		ad_View.ta_inven3.setText("");
-		ad_View.ta_inven3.append(""+three);
-		ad_View.ta_inven4.setText("");
-		ad_View.ta_inven4.append(""+four);
-		ad_View.ta_inven5.setText("");
-		ad_View.ta_inven5.append(""+five);
-		ad_View.ta_inven6.setText("");
-		ad_View.ta_inven6.append(""+six);
+		ad_View.tf_inven1.setText("");
+		ad_View.tf_inven1.setText(""+one);
+		ad_View.tf_inven2.setText("");
+		ad_View.tf_inven2.setText(""+two);
+		ad_View.tf_inven3.setText("");
+		ad_View.tf_inven3.setText(""+three);
+		ad_View.tf_inven4.setText("");
+		ad_View.tf_inven4.setText(""+four);
+		ad_View.tf_inven5.setText("");
+		ad_View.tf_inven5.setText(""+five);
+		ad_View.tf_inven6.setText("");
+		ad_View.tf_inven6.setText(""+six);
 	}
 	public static void main(String[] args) {
 		new Controller();

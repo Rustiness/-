@@ -2,6 +2,7 @@ package com.kosta.p1.javachef.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.util.Vector; //임시 벡터
 
@@ -39,8 +40,10 @@ public class MainView extends JFrame {
 
 	public MainView() {
 		
-		la_title = new JLabel("<<   자바쉐프 자판기 >.<   >>");
-		la_title.setBounds(230, 5, 200, 100);
+		Font f1 = new Font("궁서체",Font.PLAIN,40);
+		la_title = new JLabel("JAVA쉐프 - 자판기");
+		la_title.setFont(f1);
+		la_title.setBounds(50, 30, 200, 100);
 		la_title.setBackground(Color.blue);
 
 
@@ -155,7 +158,8 @@ public class MainView extends JFrame {
 		bt_cash.setBounds(60, 310, 100, 50);
 		bt_cash.setEnabled(isDisplayable());	//최초 비활성화
 		bt_card = new JButton("카드");
-		bt_card.setBounds(170, 310, 100, 50);
+		bt_card.setBounds(60, 260, 210, 50);
+		//bt_card.setBounds(170, 310, 100, 50);
 		bt_card.setEnabled(isDisplayable());	//최초 비활성화
 		bt_return = new JButton("잔금 반환");
 		bt_return.setBounds(60, 370, 100, 50);
@@ -173,12 +177,12 @@ public class MainView extends JFrame {
 		p_control.add(scroll);
 		p_control.add(bt_final);	//선택 초기화
 		p_control.add(tf_total);	//총 가격
-		p_control.add(tf_payPrice);	//입금액
-		p_control.add(tf_balance);	//잔금
-		p_control.add(bt_cash);		//현금 결제
+		//p_control.add(tf_payPrice);	//입금액
+		//p_control.add(tf_balance);	//잔금
+		//p_control.add(bt_cash);		//현금 결제
 		p_control.add(bt_card);		//카드 결제
-		p_control.add(bt_return);	//잔금 배출
-		p_control.add(la_change);	//잔금 반환구
+		//p_control.add(bt_return);	//잔금 배출
+		//p_control.add(la_change);	//잔금 반환구
 		
 		//바탕 패널 안에 이미지 넣기
 		ImageIcon p_image = new ImageIcon("data/bg_restaurant_main.png");//이미지 아이콘 객체 생성
@@ -190,7 +194,6 @@ public class MainView extends JFrame {
             }
 		};//패널의 크기에 맞게 이미지 삽입
 		
-		p.setBackground(Color.magenta);
 		p.setLayout(null);
 		p.add(bt_adminView);
 		p.add(la_title);
@@ -199,6 +202,7 @@ public class MainView extends JFrame {
 		p.add(la_ticket);
 
 		this.add(p);
+		this.setTitle("** 자판기 고객용 View **");
 		this.setBounds(180, 20, 1000, 680);
 		this.setVisible(true);
 		this.setResizable(false);
