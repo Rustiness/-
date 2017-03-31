@@ -84,20 +84,31 @@ public class Controller implements ActionListener, AdjustmentListener {
 		
 	}//remainderItems()
 
-	public void salesStatement(){//1번 부터 6번까지 제품이름, 재고수량, 판매수량 in 큰 화면
-		for(int  i= 0 ; i< itemV.size(); i++){
-			
-				Item p = itemV.get(i);
-			
-				ad_View.ta_item.append("           ▶"+"제품이름"+"  "+ p.getItemName()+"\n");
-				ad_View.ta_item.append("               "+"판매수량"+"  "+  p.getItemAcc()+"\n");
-				ad_View.ta_item.append("               "+"판매금액"+"  "+ p.getItemPrice()*p.getItemAcc()+"\n");
-				ad_View.ta_item.append("\n ");
-
-				//this.totalView();
-				System.out.println(p.getItemName()+"\t" +p.getItemNum() +"\t" + p.getItemAcc()); //Debugging
-						
-		}//for TextArea (1-6)
+	public void salesStatement(){//1번 부터 6번까지 제품이름, 재고수량, 판매수량 in 큰 화면		
+		ad_View.ta_item.setText("           ▶"+"제품이름"+"  "+ itemV.get(0).getItemName()+"\n"
+								+"               "+"판매수량"+"  "+  itemV.get(0).getItemAcc()+"\n"
+								+"               "+"판매금액"+"  "+ itemV.get(0).getItemPrice()*itemV.get(0).getItemAcc()+"\n"
+								+"\n "
+								+"           ▶"+"제품이름"+"  "+ itemV.get(1).getItemName()+"\n"
+								+"               "+"판매수량"+"  "+  itemV.get(1).getItemAcc()+"\n"
+								+"               "+"판매금액"+"  "+ itemV.get(1).getItemPrice()*itemV.get(1).getItemAcc()+"\n"
+								+"\n "
+								+"           ▶"+"제품이름"+"  "+ itemV.get(2).getItemName()+"\n"
+								+"               "+"판매수량"+"  "+  itemV.get(2).getItemAcc()+"\n"
+								+"               "+"판매금액"+"  "+ itemV.get(2).getItemPrice()*itemV.get(2).getItemAcc()+"\n"
+								+"\n "
+								+"           ▶"+"제품이름"+"  "+ itemV.get(3).getItemName()+"\n"
+								+"               "+"판매수량"+"  "+  itemV.get(3).getItemAcc()+"\n"
+								+"               "+"판매금액"+"  "+ itemV.get(3).getItemPrice()*itemV.get(3).getItemAcc()+"\n"
+								+"\n "
+								+"           ▶"+"제품이름"+"  "+ itemV.get(4).getItemName()+"\n"
+								+"               "+"판매수량"+"  "+  itemV.get(4).getItemAcc()+"\n"
+								+"               "+"판매금액"+"  "+ itemV.get(4).getItemPrice()*itemV.get(4).getItemAcc()+"\n"
+								+"\n "
+								+"           ▶"+"제품이름"+"  "+ itemV.get(5).getItemName()+"\n"
+								+"               "+"판매수량"+"  "+  itemV.get(5).getItemAcc()+"\n"
+								+"               "+"판매금액"+"  "+ itemV.get(5).getItemPrice()*itemV.get(5).getItemAcc()+"\n"
+								+"\n ");
 		
 	}//salesStatement()
 	
