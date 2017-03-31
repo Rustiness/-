@@ -98,17 +98,17 @@ public class AdminView extends JFrame {
 		ta_item.setEditable(false);
 		ta_item.setBounds(340, 100, 200, 430);
 
-		ta_inven1 = new JTextArea();
+		ta_inven1 = new JTextArea("입력");
 		ta_inven1.setBounds(42, 200, 40, 20);
-		ta_inven2 = new JTextArea();
+		ta_inven2 = new JTextArea("입력");
 		ta_inven2.setBounds(192, 200, 40, 20);
-		ta_inven3 = new JTextArea();
+		ta_inven3 = new JTextArea("입력");
 		ta_inven3.setBounds(42, 400, 40, 20);
-		ta_inven4 = new JTextArea();
+		ta_inven4 = new JTextArea("입력");
 		ta_inven4.setBounds(192, 400, 40, 20);
-		ta_inven5 = new JTextArea();
+		ta_inven5 = new JTextArea("입력");
 		ta_inven5.setBounds(42, 600, 40, 20);
-		ta_inven6 = new JTextArea();
+		ta_inven6 = new JTextArea("입력");
 		ta_inven6.setBounds(192, 600, 40, 20);
 		
 			
