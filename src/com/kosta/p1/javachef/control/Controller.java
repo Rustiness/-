@@ -24,7 +24,6 @@ public class Controller implements ActionListener, AdjustmentListener {
 	MyFile mf;
 	Vector<Object> tempV;
 	int itemCount[] = new int[6];
-	int sum;
 	
 	Vector<Item> itemV;
 	Vector v;
@@ -50,14 +49,25 @@ public class Controller implements ActionListener, AdjustmentListener {
 		this.itemView(); //상품 라벨 갱신
 		this.eventUp();
 		
-		totalView();
-		
 		m_View.addWindowListener(new WindowAdapter() {
 
 			@Override
 			public void windowClosing(WindowEvent e) {
 				//m.itemV.get(0).setItemAcc(3);
 				mf.filewrite();
+				//m.t.setTotal(total);
+				
+				System.exit(0);
+			}
+		});
+		
+		ad_View.addWindowListener(new WindowAdapter() {
+
+			@Override
+			public void windowClosing(WindowEvent e) {
+				//m.itemV.get(0).setItemAcc(3);
+				mf.filewrite();
+				//m.t.setTotal(total);
 				
 				System.exit(0);
 			}
@@ -119,25 +129,26 @@ public class Controller implements ActionListener, AdjustmentListener {
 		v.add(itemV.get(number).getItemPrice() * itemCount[number]);
 		v.add(String.format("%,d", itemV.get(number).getItemPrice() * itemCount[number]));
 
-		System.out.println("벡터 저장 전 : " + tempV.get(number).toString());
+		//System.out.println("벡터 저장 전 : " + tempV.get(number).toString());
 		tempV.set(number, v);
-		System.out.println("벡터 저장 후 : " + tempV.get(number).toString());
+		//System.out.println("벡터 저장 후 : " + tempV.get(number).toString());
 		m_View.dtm.setValueAt(v.get(1), number, 1);
 		m_View.dtm.setValueAt(String.format("%,d", v.get(2)), number, 2);
-		
+
 		int a = Integer.valueOf(String.valueOf(m_View.dtm.getValueAt(0, 2)).replaceAll(",", ""));
 		int b = Integer.valueOf(String.valueOf(m_View.dtm.getValueAt(1, 2)).replaceAll(",", ""));
 		int c = Integer.valueOf(String.valueOf(m_View.dtm.getValueAt(2, 2)).replaceAll(",", ""));
 		int d = Integer.valueOf(String.valueOf(m_View.dtm.getValueAt(3, 2)).replaceAll(",", ""));
 		int e = Integer.valueOf(String.valueOf(m_View.dtm.getValueAt(4, 2)).replaceAll(",", ""));
 		int f = Integer.valueOf(String.valueOf(m_View.dtm.getValueAt(5, 2)).replaceAll(",", ""));
-
+		
 		int total = a + b + c + d + e + f;
-
+		
 		selectTotal(total);
 		
 		m_View.bt_cash.setEnabled(true);	//결제 버튼 표시
 		m_View.bt_card.setEnabled(true);
+		
 	} // selectItem
 	
 	
@@ -171,10 +182,14 @@ public class Controller implements ActionListener, AdjustmentListener {
 	}// itemView
 
 	public void totalView(){  //총매출 표시 메소드 in 관리자
-		
-		
-		String str = "총 매출액: "+m.t.getTotal()+"원";
-		ad_View.tf_total.setText(str);
+		   int sum=0;
+		for(int i =0; i<itemV.size(); i++){
+			Item iv = itemV.get(i);
+			//salesMoney = iv.getItemAcc()* iv.getItemPrice();
+			sum += iv.getItemAcc()* iv.getItemPrice();
+			}//for
+		//m.t.setTotal(total);
+		ad_View.tf_total.setText("총 매출액: "+sum+"원");
 	}//totalView
 
 
@@ -186,7 +201,7 @@ public class Controller implements ActionListener, AdjustmentListener {
 			String str2 = str.substring(7, str.length()-1);
 			int total = Integer.parseInt(str2);
 			m.t.setTotal(total);
-			acc();
+			this.acc();
 			this.sendAcc();
 			this.selectReset(); // 상품 선택 전체 초기화
 			m_View.showMsg("결제가 완료되었습니다.");
@@ -196,25 +211,47 @@ public class Controller implements ActionListener, AdjustmentListener {
 	} //card
 	
 	public void acc(){
+		accV2.clear();
 		for (int i = 0; i < m_View.dtm.getRowCount(); i++) {
+			System.out.println("테이블행수:"+m_View.dtm.getRowCount());
+
 			int ii = (Integer) m_View.dtm.getValueAt(i, 1);
-			if (ii != 0) {
+			if (ii > 0) {
 				accV2.add(String.valueOf(m_View.dtm.getValueAt(i, 0)));
+				System.out.println("가져온 이름:"+String.valueOf(m_View.dtm.getValueAt(i, 0)));
 				accV2.add(String.valueOf(m_View.dtm.getValueAt(i, 1)));
+				System.out.println("가져온 갯수:"+String.valueOf(m_View.dtm.getValueAt(i, 1)));
 				accV.add(accV2);
+				System.out.println("acc에 "+String.valueOf(m_View.dtm.getValueAt(i, 0))+"추가함");
+				for(int j=0; j<accV2.size(); j++){
+					System.out.println("accV의 벡터"+accV2.get(j));
+				}
 			}
 		}
+		System.out.println("=====================");
 	}
 	
 	public void sendAcc(){ //상품 판매 정보 전송 
+		System.out.println("accV크기: "+accV.size());
+		//System.out.println(String.valueOf(accV.get(0).get(0)));
+		//System.out.println(String.valueOf(accV.get(1).get(0)));
+		//System.out.println(String.valueOf(accV.get(2).get(0)));
+		//System.out.println(String.valueOf(accV.get(3).get(0)));
+		int count=0;
 		for(int i=0; i<accV.size(); i++){
-			System.out.println("상품명 : "+String.valueOf(accV.get(i).get(0)));
-			System.out.println("수량 : "+String.valueOf(accV.get(i).get(1)));
-			String itemName = String.valueOf(accV.get(i).get(0));
-			int itemStock = Integer.parseInt(String.valueOf(accV.get(i).get(1)));
-			
-			m.updateItem(itemName, itemStock);
+			for(int j=count; j<accV2.size(); j++){
+				System.out.println("상품명 : "+String.valueOf(accV.get(i).get(j)));
+				System.out.println("수량 : "+String.valueOf(accV.get(i).get(j+1)));
+				String itemName = String.valueOf(accV.get(i).get(j));
+				int itemStock = Integer.parseInt(String.valueOf(accV.get(i).get(j+1)));
+				
+				m.updateItem(itemName, itemStock);
+				
+				count+=2;
+				break;
+			}
 		}
+	
 	}//sendAcc
 	
 	public void changeView(Object ob) {
@@ -224,6 +261,7 @@ public class Controller implements ActionListener, AdjustmentListener {
 			ad_View.setVisible(true); // 관리자 표시
 			this.remainderItems(); // 관리자모드가 바뀌자마자 재고수량 표시
 			this.salesStatement();// 매출표_제품이름_재고수량_판매수량
+			this.totalView();
 		} else if (ob == ad_View.bt_mainView) {
 			ad_View.setVisible(false); // 관리자 숨김
 			m_View.setLocation(600, 50);

@@ -28,14 +28,19 @@ public class Model{
 	}	
 	
 	public void updateItem(String itemName, int itemAcc){
-		
+		System.out.println(itemName + itemAcc);
 		for(int i=0;i<itemV.size();i++){
 			
 			it=itemV.get(i);
 			     
-			  if(it.getItemName().equals(itemName)){
+			  if(itemName.equals(it.getItemName())){
 				  it.setItemNum(it.getItemNum()-itemAcc);
 				  it.setItemAcc(it.getItemAcc()+itemAcc);  
+				  
+				  System.out.println(it.getItemNum());
+				  System.out.println(it.getItemAcc());
+				  
+				  return;
 				  
 			  }//if			
 		}//for
