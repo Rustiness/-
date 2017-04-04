@@ -7,9 +7,6 @@ import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Vector;
 
 import com.kosta.p1.javachef.model.Item;
@@ -17,32 +14,32 @@ import com.kosta.p1.javachef.model.Model;
 import com.kosta.p1.javachef.view.AdminView;
 import com.kosta.p1.javachef.view.MainView;
 
-public class Controller extends Thread implements ActionListener, AdjustmentListener {
+public class Controller implements ActionListener, AdjustmentListener {
+	MThread cThread; // 스레드 선언
 	MainView m_View;
 	AdminView ad_View;
 
 	Model m;
 	MyFile mf;
-	Vector<Object> tempV;
 	int itemCount[] = new int[6];
-	
+
+	Vector<Object> tempV;
 	Vector<Item> itemV;
-	Vector v;
-	Vector<Vector> accV;
-	Vector<String> accV2;
+	Vector<Object> v;
+	Vector<Vector> accV;// 아래의 벡터를 담은 벡터(여러 아이템을 구매했을때를 위한)
+	Vector<String> accV2;// 고객이 선택한 아이템이름과 수량을 담는 벡터
 
 	public Controller() {
 		m_View = new MainView();
 		ad_View = new AdminView();
 
 		m = new Model();
-		tempV = new Vector<>();
-
 		mf = new MyFile(m);
 		mf.filereader();
-		
+
+		tempV = new Vector<>();
 		itemV = m.selectitemAll();
-		v = new Vector();
+		v = new Vector<>();
 		accV = new Vector<>();
 		accV2 = new Vector<>();
 		
@@ -116,7 +113,7 @@ public class Controller extends Thread implements ActionListener, AdjustmentList
 	
 	public void viewItemTable() { // 상품 테이블 표시 초기화
 		for (int i = 0; i < 6; i++) {
-			v = new Vector();
+			v = new Vector<Object>();
 			v.add(itemV.get(i).getItemName());
 			v.add(itemCount[i]);
 			v.add(itemV.get(i).getItemPrice() * itemCount[0]);
@@ -125,7 +122,7 @@ public class Controller extends Thread implements ActionListener, AdjustmentList
 			m_View.dtm.addRow((Vector) tempV.get(0));
 		}
 	}
-
+	
 	
 	public void selectItem(int number) {// 상품 선택
 		if (itemV.get(number).getItemNum() - (Integer) m_View.dtm.getValueAt(number, 1) < 1){
@@ -135,7 +132,7 @@ public class Controller extends Thread implements ActionListener, AdjustmentList
 		
 		itemCount[number]++; // 카운터
 		this.itemView(); //상품 라벨 갱신
-		v = new Vector();
+		v = new Vector<>();
 		v.add(itemV.get(number).getItemName());
 		v.add(itemCount[number]);
 		v.add(itemV.get(number).getItemPrice() * itemCount[number]);
@@ -164,11 +161,10 @@ public class Controller extends Thread implements ActionListener, AdjustmentList
 
 	} // selectItem
 	
-	
 	public void selectTotal(int total) { //선택 총 가격 
 		m_View.tf_total.setText("총 가격 : " + String.format("%,d", total) + "원");
 	}//selectTotal
-
+	
 	public void selectReset() { // 상품 선택 전체 초기화
 		this.itemView(); // 상품 라벨 갱신
 		m_View.bt_cash.setEnabled(false); // 결제 버튼 숨김
@@ -176,7 +172,7 @@ public class Controller extends Thread implements ActionListener, AdjustmentList
 		m_View.bt_final.setEnabled(false);
 		for (int i = 0; i < tempV.size(); i++) {
 			itemCount[i] = 0;
-			v = new Vector();
+			v = new Vector<>();
 			v.add(itemV.get(i).getItemName());
 			v.add(0);
 			v.add(0);
@@ -187,14 +183,14 @@ public class Controller extends Thread implements ActionListener, AdjustmentList
 			selectTotal(0);
 		}
 	} // selectReset
-
+	
 	public void itemView() { // 자판기 상품명 가격 표시 메소드
 		for (int i = 0; i < itemV.size(); i++) {
 			Item item = itemV.get(i);
 			m_View.la_menu_arr[i].setText(item.getItemName() + " | " + String.format("%,d", item.getItemPrice()) + "원 | " + item.getItemNum() +"매");
 		}
 	}// itemView
-
+	
 	public void totalView(){  //총매출 표시 메소드 in 관리자
 		   int sum=0;
 		for(int i =0; i<itemV.size(); i++){
@@ -205,9 +201,7 @@ public class Controller extends Thread implements ActionListener, AdjustmentList
 		//m.t.setTotal(total);
 		ad_View.tf_total.setText("총 매출액: "+sum+"원");
 	}//totalView
-
-
-
+	
 	public void card(){ //카드 결제
 		int i = m_View.showConfMsg(m_View.tf_total.getText() + " 입니다.\n 카드결제를 진행하시겠습니까?");
 		if(i == 0){
@@ -219,33 +213,16 @@ public class Controller extends Thread implements ActionListener, AdjustmentList
 			this.sendAcc();
 			this.selectReset(); // 상품 선택 전체 초기화
 			m_View.showMsg("결제가 완료되었습니다.");
-			start();
+			cThread = new MThread(); // 스레드 초기화
+			cThread.start(); // 스레드 시작
 		}
-  		
 		//System.out.println(m.t.getTotal());
 	} // card
 	
-	public void run() {
-		try {
-			for (int i = 0; i < 8; i++) {
-				m_View.la_ticket.setBackground(Color.BLUE);
-				Thread.sleep(100);
-				m_View.la_ticket.setBackground(Color.MAGENTA);
-				Thread.sleep(100);
-			}
-			m_View.la_ticket.setBackground(Color.MAGENTA);
-			Thread.sleep(800);
-			m_View.la_ticket.setBackground(Color.DARK_GRAY);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			// e.printStackTrace();
-		}
-	}
-	
-	public void acc(){
+	public void acc() {
 		accV2.clear();
 		for (int i = 0; i < m_View.dtm.getRowCount(); i++) {
-			//System.out.println("테이블행수:"+m_View.dtm.getRowCount());
+			// System.out.println("테이블행수:"+m_View.dtm.getRowCount());
 
 			int ii = (Integer) m_View.dtm.getValueAt(i, 1);
 			if (ii > 0) {
@@ -364,16 +341,12 @@ public class Controller extends Thread implements ActionListener, AdjustmentList
 		ad_View.bt_minus5.addActionListener(this);
 		ad_View.bt_minus6.addActionListener(this);//메뉴 6 수량 회수버튼
 		
-	    ad_View.scroll_inven1.addAdjustmentListener(this);
+		ad_View.scroll_inven1.addAdjustmentListener(this);
 		ad_View.scroll_inven2.addAdjustmentListener(this);
 		ad_View.scroll_inven3.addAdjustmentListener(this);
 		ad_View.scroll_inven4.addAdjustmentListener(this);
 		ad_View.scroll_inven5.addAdjustmentListener(this);
 		ad_View.scroll_inven6.addAdjustmentListener(this);
-		
-		
-
-	
 	}// eventUp
 
 	@Override
@@ -386,8 +359,7 @@ public class Controller extends Thread implements ActionListener, AdjustmentList
 		this.clearMenu(ob); //메인뷰의 취소버튼 조작
 		this.payCash(ob); //메인뷰의 현금버튼 조작
 		this.payCard(ob); //메인뷰의 카드버튼 조작
-	
-
+		
 		if (ob == ad_View.bt_add1) {// 1번 재고수량 추가 버튼
 			
 			if(m.itemV.get(0).getItemNum()+ ad_View.scroll_inven1.getValue() > 200) {
@@ -512,7 +484,6 @@ public class Controller extends Thread implements ActionListener, AdjustmentList
 				ad_View.scroll_inven6.setValue(0);	
 			}
 			remainderItems();
-
 		}//관리자 button 추가, 삭제
 	}// actionPerformed
 	@Override
@@ -540,4 +511,24 @@ public class Controller extends Thread implements ActionListener, AdjustmentList
 	public static void main(String[] args) {
 		new Controller();
 	}// main
+
+	class MThread extends Thread { // 스레드 클래스 생성
+		public void run() { // 스레드 run 메소드
+			try {
+				for (int i = 0; i < 8; i++) {
+					m_View.la_ticket.setBackground(Color.BLUE);
+					Thread.sleep(100);
+					m_View.la_ticket.setBackground(Color.MAGENTA);
+					Thread.sleep(100);
+				}
+				m_View.la_ticket.setBackground(Color.MAGENTA);
+				Thread.sleep(800);
+				m_View.la_ticket.setBackground(Color.DARK_GRAY);
+				System.out.println(this.getState());
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}//run
+	}//Thread
 }

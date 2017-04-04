@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.util.Vector; //юс╫ц ╨╓ем
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
